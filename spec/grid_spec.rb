@@ -63,6 +63,12 @@ describe Grid do
      	expect(grid.squares[0].value).to eq 6
     end
 
+   it "skips over a square if it\'s already solved" do
+  		puzzle = '015003002000100906270068430490002017501040380003905000900081040860070025037204600'
+   		grid = Grid.new puzzle
+     	expect(grid.solve_square_in 1).to eq nil
+    end
+
    it "knows it\'s current state" do
  		puzzle = '0' * 81
 		grid = Grid.new puzzle
@@ -90,11 +96,6 @@ describe Grid do
 		copy = grid.duplicate
 		expect(copy.current_state).to eq grid.current_state
     end
-
-
-
-
-
 
     it "can solve an empty puzzle" do
 		grid = Grid.new
@@ -141,11 +142,11 @@ describe Grid do
 		expect(grid.solve).to eq "COULDN'T SOLVE IT!"
     end
 
-    # it "knows the index number of all the square's peers" do
-    # 	expect(grid.peers_of_square_in_index 1).to eq [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 19, 20, 21, 28, 37, 46, 55, 64, 73]
-    # 	expect(grid.peers_of_square_in_index 81).to eq [9, 18, 27, 36, 45, 54, 61, 62, 63, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80]
-    # end
-
-
+ 	it "can print the grid in the terminal" do
+  		easy_puzzle = '015003002000100906270068430490002017501040380003905000900081040860070025037204600'
+		grid = Grid.new easy_puzzle
+		grid.solve
+ 		puts grid.print_in_terminal
+ 	end
 end
 

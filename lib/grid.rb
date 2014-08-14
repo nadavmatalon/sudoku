@@ -108,8 +108,9 @@ class Grid
 			print square.value.to_s + " "
 			print "| " if index % 3 == 0 && index % 9 != 0
 			puts "" if index % 9 == 0
-			puts "-" * 21 if index % 27 == 0
+			puts "-" * 21 if index % 27 == 0 && index != NUMBER_OF_SQUARES
 		end
+		puts ""
 	end	
 end
 
