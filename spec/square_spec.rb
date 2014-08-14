@@ -22,9 +22,22 @@ describe Square do
 		expect(square.value).to eq 0
 	end
 
+	it "knows if it\'s been solved" do
+		expect(square.solved?).to be false
+		square.value = 1
+		expect(square.solved?).to be true
+	end
 
+	it "knows if it\'s still unsolved" do
+		expect(square.unsolved?).to be true
+		square.value = 1
+		expect(square.unsolved?).to be false
+	end
 
-
+	it "can set it\'s value" do
+		square.set 1
+		expect(square.value).to eq 1
+	end
 end
 
 

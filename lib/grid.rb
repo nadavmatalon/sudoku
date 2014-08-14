@@ -83,13 +83,13 @@ class Grid
 		candidates = candidates_for empty_square.index
 		candidates.each do |candidate|
 			empty_square.set candidate
-			grid = replicate
+			grid = duplicate
 			grid.solve
-			get_solution_for grid and return if grid.fully_solved?
+			upload_solution_to grid and return if grid.fully_solved?
 		end
 	end
 
-	def replicate
+	def duplicate
 		self.class.new(self.current_state)
 	end
 
@@ -97,7 +97,7 @@ class Grid
   		squares.map {|square| square.value}.join
   	end
 
-	def get_solution_for grid
+	def upload_solution_to grid
 		upload grid.current_state
 	end
 
