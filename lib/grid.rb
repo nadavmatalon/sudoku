@@ -59,15 +59,15 @@ class Grid
   		squares.count(&:unsolved?) == 0
   	end
 
-	def solve
-		current_state, keep_looping = NUMBER_OF_SQUARES, false
-		while !fully_solved? && !keep_looping
+	def solve 
+		start_time, current_state, stop_looping = Time.now, NUMBER_OF_SQUARES, false
+		while !fully_solved? && !stop_looping
 			squares.each { |square| solve_square_in square.index }
 			new_state = squares.count(&:solved?)
-			keep_looping = current_state == new_state
+			stop_looping = true if current_state == new_state || Time.now - start_time > 0.75
 			current_state = new_state
 		end
-		try_again unless fully_solved?
+		try_again unless fully_solved? || Time.now - start_time > 1.50
 		fully_solved? ? "SOLVED IT!" : "COULDN'T SOLVE IT!"
 	end
 
