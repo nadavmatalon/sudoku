@@ -78,6 +78,11 @@ class Grid
   		end
 	end
 
+	def legit_solution? index, value
+		candidates = candidates_for index
+		candidates.include? value
+	end
+
 	def try_again
 		empty_square = squares.reject(&:solved?).first
 		candidates = candidates_for empty_square.index
