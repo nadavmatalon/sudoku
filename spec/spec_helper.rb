@@ -1,6 +1,4 @@
-require "./lib/square.rb"
-require "./lib/grid.rb"
-require "./lib/puzzle_generator.rb"
+require "./lib/sudoku.rb"
 
 RSpec.configure do |config|
 
