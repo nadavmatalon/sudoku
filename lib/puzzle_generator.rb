@@ -36,14 +36,15 @@ class PuzzleGenerator
 	end
 
 	def self.solve grid
-		start_time, current_state, keep_looping = Time.now, Grid::NUMBER_OF_SQUARES, false
-		while !grid.fully_solved? && !keep_looping
+		start_time, current_state, stop_looping = Time.now, Grid::NUMBER_OF_SQUARES, false
+		while !grid.fully_solved? && !stop_looping
 			grid.squares.each { |square| grid.solve_square_in square.index }
 			new_state = grid.squares.count(&:solved?)
-			keep_looping = current_state == new_state
+			stop_looping = true if current_state == new_state || Time.now - start_time > 0.75
 			current_state = new_state
 		end
-		grid.try_again unless grid.fully_solved? || (Time.now - start_time > 0.75)
+		grid.try_again unless grid.fully_solved? || Time.now - start_time > 1.50
 		grid.fully_solved?
 	end
+
 end
