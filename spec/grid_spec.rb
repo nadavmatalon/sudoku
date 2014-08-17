@@ -13,7 +13,7 @@ describe Grid do
     end
 
    it "can be initiallized with a puzzle" do
-        puzzle = PuzzleGenerator::generate_puzzle
+      puzzle = "786214590150369080003708416267093800490800601308500072072400300641035700000602054"
    		grid = Grid.new puzzle
    		grid.squares.each_with_index do |square, index| 
    			expect(square.value).to eq puzzle.chars[index].to_i
@@ -21,7 +21,7 @@ describe Grid do
     end
 
   it "can upload a puzzle after initialization" do
-        puzzle = PuzzleGenerator::generate_puzzle
+      puzzle = "786214590150369080003708416267093800490800601308500072072400300641035700000602054"
    		grid.upload puzzle
    		grid.squares.each_with_index do |square, index| 
    			expect(square.value).to eq puzzle.chars[index].to_i
@@ -114,42 +114,42 @@ describe Grid do
     end
 
    it "can solve a very easy puzzle" do
-        very_easy_puzzle = PuzzleGenerator::generate_puzzle 1
+        very_easy_puzzle = "786214590150369080003708416267093800490800601308500072072400300641035700000602054"
 		grid = Grid.new very_easy_puzzle
 		grid.solve
 		expect(grid.fully_solved?).to be true
     end
 
   it "can solve an easy puzzle" do
-        easy_puzzle = PuzzleGenerator::generate_puzzle 2
+        easy_puzzle = "520130000000062005046500109000070984280301650009804000051923000473600090002745060"
         grid = Grid.new easy_puzzle
         grid.solve
         expect(grid.fully_solved?).to be true
     end
 
   	it "can solve a medium puzzle" do
-        medium_puzzle = PuzzleGenerator::generate_puzzle 3
+        medium_puzzle = "003510000010780090700246000004060800000058930000000000002305009956020000300600208"
 		grid = Grid.new medium_puzzle
 		grid.solve
 		expect(grid.fully_solved?).to be true
     end
 
  	it "can solve a hard puzzle" do
-        hard_puzzle = PuzzleGenerator::generate_puzzle 4
+        hard_puzzle = "800003000000006001000400050003004800006100000000000500000000005000630700050821000"
 		grid = Grid.new hard_puzzle
 		grid.solve
 		expect(grid.fully_solved?).to be true
     end
 
     it "can solve a very hard puzzle" do
-        very_hard_puzzle = PuzzleGenerator::generate_puzzle 5
+        very_hard_puzzle = "600040000041000000009000000000071090000000000000080000000000200000000000000000000"
         grid = Grid.new very_hard_puzzle
         grid.solve
         expect(grid.fully_solved?).to be true
     end
 
    it "gives correct feedback after solving a puzzle" do
-        puzzle = PuzzleGenerator::generate_puzzle
+        puzzle = "786214590150369080003708416267093800490800601308500072072400300641035700000602054"
 		grid = Grid.new puzzle
 		expect(grid.solve).to eq "SOLVED IT!"
     end
@@ -168,7 +168,7 @@ describe Grid do
     end
 
  	it "can print the current state of a grid in the terminal" do
-        puzzle = PuzzleGenerator::generate_puzzle
+        puzzle = "786214590150369080003708416267093800490800601308500072072400300641035700000602054"
 		grid = Grid.new puzzle
 		grid.solve
  		puts grid.print_in_terminal
