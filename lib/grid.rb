@@ -25,8 +25,8 @@ class Grid
 			column < 9 ? column += 1 : (column = 1 ; row += 1)
 			box += 1 if ((column - 1) % 3) == 0
 			box = 1 if index % 9 == 0 && row <= 3
-			box = 4 if index % 9 == 0 && row >=4 && row <= 6
-			box = 7 if index % 9 == 0 && row >=7
+			box = 4 if index % 9 == 0 && row >= 4 && row <= 6
+			box = 7 if index % 9 == 0 && row >= 7
 		end 
 		squares		
  	end
