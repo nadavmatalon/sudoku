@@ -84,12 +84,12 @@ $ require './lib/sudoku.rb'
 After that, you can use the following constructors and methods:<br/>
 (additional supporting methods can be found in the code itself):
 
-| Constructors  | Description                                                      |
+| Constructor  | Description                                                      |
 |----------|-----------------------------------------------------------------------|
 | Grid.new | returns a new (empty) instance of a grid with 9x9 squares             |
 | Grid.new (puzzle) | returns a new instance of a grid with a pre-loaded puzzle (see definition of a 'puzzle' below) | 
 
-| Methods  | Description                                                           |
+| Method  | Description                                                           |
 |----------|-----------------------------------------------------------------------|
 | .upload (puzzle) | uploads a puzzle to a grid instance                           |
 | .solve   | generates a complete solution for the puzzle                          |
@@ -101,7 +101,7 @@ After that, you can use the following constructors and methods:<br/>
 
 * A `puzzle` is a String with 81 chars (each char must have value of 0-9).
 
-Here are three example of `puzzle` you can use:
+Here are three example of a `puzzle` you can use:
 
 ```ruby
 easy_puzzle =   '015003002000100906270068430490002017501040380003905000900081040860070025037204600'
