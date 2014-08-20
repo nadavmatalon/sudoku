@@ -81,17 +81,20 @@ $ irb
 $ require './lib/sudoku.rb'
 ```
 
-After that, you can use the following methods:<br/>
+After that, you can use the following constructors and methods:<br/>
 (additional supporting methods can be found in the code itself):
 
-| Methods  | Description                                                           |
+| Constructors  | Description                                                      |
 |----------|-----------------------------------------------------------------------|
 | Grid.new | returns a new (empty) instance of a grid with 9x9 squares             |
 | Grid.new (puzzle)   | returns a new instance of a grid with a pre-loaded puzzle  |
 |          | (see definition of a 'puzzle' below)                                  |
-| .print_in_terminal  | prints the grid instace in the terminal                    |
-| .solve   | generates a complete solution for the puzzle                          |
+
+| Methods  | Description                                                           |
+|----------|-----------------------------------------------------------------------|
 | .upload (puzzle) | uploads a puzzle to a grid instance                           |
+| .solve   | generates a complete solution for the puzzle                          |
+| .print_in_terminal  | prints the grid instace in the terminal                    |
 | .current_state | returns a String with the current state of the grid (ie value of each square) |
 | .fully_solved? | returns a boolean (true => grid is fully solved ; false => it's not fully solved |
 | .candidates_for (index) | returns an Array with possible solutions to a square at a given location (index => 0-80) | 
