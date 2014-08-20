@@ -4,7 +4,7 @@
 
 * [Screenshots](#screenshots)
 * [General Description](#general-description)
-* [Main App Functionality](#main-app-functionality)
+* [Main Functionality](#main-functionality)
 * [Running in Terminal](#running-in-terminal)
 * [Testing](#testing)
 * [License](#license)
@@ -42,13 +42,13 @@ This code implements the basic logic for the game of 'Sudoku' in terminal.
 
 It was written in Ruby according to TDD.
 
-So what is Sodoku?
+So what is __Sodoku__?
 
 ```
-"Sudoku is a logic-based combinatorial number-placement puzzle. The objective is to fill 
+Sudoku is a logic-based combinatorial number-placement puzzle. The objective is to fill 
 a grid made of 9x9 `squares` (81 in total) with digits so that each `column`, each `row`, 
 and each `box`* contains all of the digits from 1 to 9. The puzzle setter provides a 
-partially completed grid, which may have a unique solution or several possible solutions."
+partially completed grid, which may have a unique solution or several possible solutions.
 
 * The grid contians 9 so-called 'boxes', that is 3x3 sub-grids within the general grid.
 ```
@@ -56,13 +56,12 @@ partially completed grid, which may have a unique solution or several possible s
 (Adapted from: [Wikipedia on Sudoku](http://en.wikipedia.org/wiki/Sudoku))
 
 
-##Main App Functionality
+##Main Functionality
 
-The code offers the following main functions:
-(see [] seciotn below for additional functionality):
-
+The code offers the following main functions:<br/>
+(see [] section below for additional functionality):
 * Creating a new Soduko grid (with or without an uploaded puzzle)
-* Generating puzzles (with difficulty levels ranging from 'Very Easy' [1] to 'Very Hard' [5])
+* Generating new puzzles with difficulty levels ranging from 'Very Easy' (1) to 'Very Hard' (5)
 * Uploading a puzzle to the grid
 * Printing the grid in terminal
 * Generating a complete solution to the puzzle
@@ -73,7 +72,7 @@ The code offers the following main functions:
 To run the code in terminal, run:
 
 ```bash
-$ irb						// or 'pry' if you prefer (and have it installed)
+$ irb
 $ require ./lib/sudoku.rb
 ```
 
