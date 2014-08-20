@@ -6,7 +6,7 @@
 * [General Description](#general-description)
 * [What is Soduko](#what-is-soduko)
 * [Main Functionality](#main-functionality)
-* [Running in Terminal](#running-in-terminal)
+* [Detailed Functionality](#detailed-functionality)
 * [Testing](#testing)
 * [License](#license)
 
@@ -76,7 +76,7 @@ more detailed account of the code's functionality):
 * Generating a complete solution for the puzzle
 
 
-##Running in Terminal
+##Detailed Functionality
 
 To run the code in terminal, run:
 
