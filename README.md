@@ -45,10 +45,14 @@ It was written in Ruby according to TDD.
 So what is __Sodoku__?
 
 ```
-Sudoku is a logic-based combinatorial number-placement puzzle. The objective is to fill 
-a grid made of 9x9 `squares` (81 in total) with digits so that each `column`, each `row`, 
-and each `box`* contains all of the digits from 1 to 9. The puzzle setter provides a 
-partially completed grid, which may have a unique solution or several possible solutions.
+Sudoku is a logic-based combinatorial number-placement puzzle. 
+
+The objective is to fill a grid made of 9x9 `squares` (81 in total) with digits  
+so that each `column`, each `row`, and each `box`* contains all of the digits 
+from 1 to 9. 
+
+The puzzle setter provides a partially completed grid, which may have a unique 
+solution or several possible solutions.
 
 * The grid contians 9 so-called 'boxes', that is 3x3 sub-grids within the general grid.
 ```
