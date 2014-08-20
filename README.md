@@ -4,6 +4,7 @@
 
 * [Screenshots](#screenshots)
 * [General Description](#general-description)
+* [What is Soduko](#what-is-soduko)
 * [Main Functionality](#main-functionality)
 * [Running in Terminal](#running-in-terminal)
 * [Testing](#testing)
@@ -42,7 +43,10 @@ This code implements the basic logic for the game of 'Sudoku' in terminal.
 
 It was written in Ruby according to TDD.
 
-So what is __Sodoku__?
+
+##What is Soduko
+
+Here's a brief description of the game:
 
 ```
 Sudoku is a logic-based combinatorial number-placement puzzle. 
