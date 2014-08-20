@@ -106,7 +106,6 @@ The Grid class contains the following `constructors` and `instance methods`:
 | .current_state | returns a String with the current state of the grid (ie value of each square) |
 | .fully_solved? | returns a boolean (true => grid is fully solved ; false => it's not) |
 | .candidates_for(index) | returns an Array with possible solutions to a square at a given index (0-80) | 
-| .solve_square_in(index) | provides a solution to a square based on its index (0-80) |
 
 * A `puzzle` is a String with 81 chars (each char must have value of 0-9).
 
