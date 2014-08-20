@@ -66,7 +66,7 @@ The code offers the following main functions:<br/>
 (see the [Running in Terminal](#running-in-terminal) section below for a 
 more detailed account of the code's functionality):
 * Creating a new Soduko grid (with or without an uploaded puzzle)
-* Generating new puzzles with difficulty levels ranging from 'Very Easy' (1) to 'Very Hard' (5)
+* Generating new puzzles a difficulty level ranging from 'Very Easy' to 'Very Hard' (1-5)
 * Uploading a puzzle to the grid
 * Printing the grid in terminal
 * Generating a complete solution to the puzzle
