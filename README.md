@@ -15,22 +15,22 @@
 
 <table>
 	<tr>
-		<td align="center" width="200px">
+		<td align="center" width="190px">
 			<a href="https://raw.githubusercontent.com/nadavmatalon/sudoku/master/images/sudoku_1.jpg">
 				<img src="images/sudoku_1.jpg" height="92px" />
 				  A New Puzzle
 			</a>
 		</td>
-		<td align="center" width="200px">
+		<td align="center" width="190px">
 			<a href="https://raw.githubusercontent.com/nadavmatalon/sudoku/master/images/sudoku_2.jpg">
 				<img src="images/sudoku_2.jpg" height="92px" />
 				 Solving the Puzzle
 			</a>
 		</td>
-		<td align="center" width="200px">
+		<td align="center" width="190px">
 			<a href="https://raw.githubusercontent.com/nadavmatalon/sudoku/master/images/sudoku_3.jpg">
 				<img src="images/sudoku_3.jpg" height="92px" />
-				 Unit Testing
+				 Testing
 			</a>
 		</td>
 	</tr>
