@@ -17,19 +17,19 @@
 		<td align="center" width="200px">
 			<a href="https://raw.githubusercontent.com/nadavmatalon/sudoku/master/images/sudoku_1.jpg">
 				<img src="images/sudoku_1.jpg" height="92px" />
-				 Generating a Puzzle
+				  A New Puzzle
 			</a>
 		</td>
 		<td align="center" width="200px">
 			<a href="https://raw.githubusercontent.com/nadavmatalon/sudoku/master/images/sudoku_2.jpg">
 				<img src="images/sudoku_2.jpg" height="92px" />
-				 Solving a Puzzle
+				 Solving the Puzzle
 			</a>
 		</td>
 		<td align="center" width="200px">
 			<a href="https://raw.githubusercontent.com/nadavmatalon/sudoku/master/images/sudoku_3.jpg">
 				<img src="images/sudoku_3.jpg" height="92px" />
-				 Testing
+				 Unit Testing
 			</a>
 		</td>
 	</tr>
@@ -63,7 +63,8 @@ solution or several possible solutions.
 ##Main Functionality
 
 The code offers the following main functions:<br/>
-(see [] section below for additional functionality):
+(see the [Running in Terminal](#running-in-terminal) section below for a 
+more detailed account of the code's functionality):
 * Creating a new Soduko grid (with or without an uploaded puzzle)
 * Generating new puzzles with difficulty levels ranging from 'Very Easy' (1) to 'Very Hard' (5)
 * Uploading a puzzle to the grid
