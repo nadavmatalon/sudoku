@@ -126,10 +126,12 @@ The PuzzleGenerator uses `class` methods to generate random puzzles.
 
 Puzzles can be createsd with a difficulty level between 1-5 ('Very Easy' to 'Very Hard').
 
-The default difficulty level if no argument is given is: 3.
+The default difficulty level if no argument is given is 3.
 
 The level of difficulty is based on the number of empty squares (designated by the value 0)
 in the puzzle (the more empty squares there are the harder the puzzle).
+
+The PuzzleGenerator makes sure that every new puzzle is solvable.
 
 To generate a new puzzle, run:
 
