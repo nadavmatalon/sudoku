@@ -80,9 +80,9 @@ more detailed account of the code's functionality):
 
 To run the code in terminal, run:
 
-```bash
+```
 $ irb
-$ require './lib/sudoku.rb'
+> require './lib/sudoku.rb'
 ```
 
 After that, you can use the following constructors and methods for the __Grid__ and __PuzzleGenerator__ classes<br/> 
@@ -133,23 +133,23 @@ in the puzzle (the more empty squares there are the harder the puzzle).
 
 To generate a new puzzle, run:
 
-```bash
-$ PuzzleGenerator::generate_puzzle
+```ruby
+> PuzzleGenerator::generate_puzzle
 => "600000400003000091041060230024093080000701000709020000000006009008279050000045800"
 
-$ PuzzleGenerator::generate_puzzle 1
+> PuzzleGenerator::generate_puzzle 1
 => "508013649423509087691740050007150000856000714000480500982075460715624003000891200"
 
-$ PuzzleGenerator::generate_puzzle 2
+> PuzzleGenerator::generate_puzzle 2
 => "005034078040207005061050300029083706536000480007005093000040509910500800050908042"
 
-$ PuzzleGenerator::generate_puzzle 3
+> PuzzleGenerator::generate_puzzle 3
 => "860007009052430008940006007230900005000005903509008001004090700000003010080000000"
 
-$ PuzzleGenerator::generate_puzzle 4
+> PuzzleGenerator::generate_puzzle 4
 => "006000000040008007050709000007000900000000050305000060070400000800000006004000079"
 
-$ PuzzleGenerator::generate_puzzle 5
+> PuzzleGenerator::generate_puzzle 5
 => "900010060000000000000000050010000000000000400300000800400070000000000000000000000"
 
 ```
