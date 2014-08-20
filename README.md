@@ -87,8 +87,7 @@ After that, you can use the following constructors and methods:<br/>
 | Constructors  | Description                                                      |
 |----------|-----------------------------------------------------------------------|
 | Grid.new | returns a new (empty) instance of a grid with 9x9 squares             |
-| Grid.new (puzzle)   | returns a new instance of a grid with a pre-loaded puzzle  |
-|          | (see definition of a 'puzzle' below)                                  |
+| Grid.new (puzzle) | returns a new instance of a grid with a pre-loaded puzzle (see definition of a 'puzzle' below) | 
 
 | Methods  | Description                                                           |
 |----------|-----------------------------------------------------------------------|
