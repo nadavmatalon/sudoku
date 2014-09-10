@@ -41,27 +41,26 @@
 
 This app implements the logic for the game of __Sudoku__.
 
-It was written in Ruby according to TDD using [Rspec](http://rspec.info/). 
+It was written in [Ruby](https://www.ruby-lang.org/en/) according to [TDD](http://en.wikipedia.org/wiki/Test-driven_development) using [Rspec](http://rspec.info/). 
 
 
 ##What is Soduko
 
 Here's a brief description of the game:
 
-```
-Sudoku is a logic-based combinatorial number-placement puzzle. 
 
-The objective is to fill a grid made of 9x9 `squares` (81 in total) with digits  
-so that each `column`, each `row`, and each `box`* contains all of the digits 
-from 1 to 9. 
+>__Sudoku__ is a logic-based combinatorial number-placement puzzle. 
+>
+>The objective is to fill a grid made of 9x9 `squares` (81 in total) with digits  
+>so that each `column`, each `row`, and each `box`* contains all of the digits 
+>from 1 to 9. 
+>
+>The puzzle setter provides a partially completed grid, which may have a unique 
+>solution or several possible solutions.
+>
+> \* The grid contians 9 so-called 'boxes', that is 3x3 sub-grids within the general grid.
 
-The puzzle setter provides a partially completed grid, which may have a unique 
-solution or several possible solutions.
-
-* The grid contians 9 so-called 'boxes', that is 3x3 sub-grids within the general grid.
-```
-
-(Adapted from: [Wikipedia on Sudoku](http://en.wikipedia.org/wiki/Sudoku))
+(Source: [Wikipedia on Sudoku](http://en.wikipedia.org/wiki/Sudoku))
 
 
 ##Main Functionality
