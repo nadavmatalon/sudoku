@@ -39,9 +39,9 @@
 
 ##General Description
 
-This code implements the basic logic for the game of 'Sudoku' in terminal.
+This app implements the logic for the game of __Sudoku__.
 
-It was written in Ruby according to TDD.
+It was written in Ruby according to TDD using [Rspec](http://rspec.info/). 
 
 
 ##What is Soduko
@@ -157,9 +157,9 @@ To generate a new puzzle, run:
 
 ##Testing
 
-Tests were written with Rspec (3.0.4)
+Tests were written with [Rspec](http://rspec.info/) (3.0.4).
 
-To run the tests in terminal: 
+To run the testing suite in terminal: 
 
 ```bash
 $ rspec
