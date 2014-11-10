@@ -5,8 +5,8 @@
 * [Screenshots](#screenshots)
 * [General Description](#general-description)
 * [What is Soduko](#what-is-soduko)
-* [Main Functionality](#main-functionality)
-* [Detailed Functionality](#detailed-functionality)
+* [Functional Description](#functional-description)
+* [How to Install and Run Locally](#how-to-install-and-run-locally)
 * [Testing](#testing)
 * [License](#license)
 
@@ -65,30 +65,32 @@ Here's a brief description of the game:
 
 ##Main Functionality
 
-The code offers the following main functions:<br/>
-(see the [Running in Terminal](#running-in-terminal) section below for a 
-more detailed account of the code's functionality):
-* Creating a new Soduko grid (with or without an uploaded puzzle)
-* Generating new puzzles difficulty levels ranging from 'Very Easy' to 'Very Hard' (1-5)
+The code offers the following main UI functions:<br/>
+(see the [How to Install and Run Locally](#how-to-install-and-run-locally) 
+section below for a detailed account of the code's classes and methods):
+* Creating a new Soduko grid (empty or with an uploaded puzzle)
+* Generating new puzzles  - difficulty levels ranging from 'Very Easy' to 'Very Hard' (1-5)
 * Uploading a puzzle to the grid
 * Printing the grid in terminal
 * Generating a complete solution for the puzzle
 
 
-##Detailed Functionality
+##How to Install and Run Locally
 
-To run the code in terminal, run:
+To run the code in terminal, clone the repo locally and run:
 
+```bash
+$> cd sudoku
+$> irb
+>> require './lib/sudoku.rb'
 ```
-$ irb
-> require './lib/sudoku.rb'
-```
 
-After that, you can use the following constructors and methods for the __Grid__ and __PuzzleGenerator__ classes<br/> 
-(additional supporting methods can be found in the code itself):
+After that, you can use the following main constructors and methods for 
+the __Grid__ and __PuzzleGenerator__ classes<br/> 
+(additional supporting classes and methods can be found in the code itself):
 
 
-###The Grid Class
+###Grid Class
 
 The Grid class contains the following `constructors` and `instance methods`:
 
@@ -118,7 +120,7 @@ medium_puzzle = '000200001060075000057004060900000608000080000005630040500003000
 hard_puzzle =   '800000000003600000070090200050007000000045700000100030001000068008500010090000400'
 ```
 
-###The PuzzleGenerator Class
+###PuzzleGenerator Class
 
 The PuzzleGenerator uses `class` methods to generate random puzzles.
 
@@ -158,10 +160,11 @@ To generate a new puzzle, run:
 
 Tests were written with [Rspec](http://rspec.info/) (3.1.0).
 
-To run the testing suite in terminal: 
+To run the testing suite in terminal, clone the repo and run: 
 
 ```bash
-$ rspec
+$> ch sudoku
+$> rspec
 ```
 
 ##License
