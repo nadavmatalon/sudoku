@@ -20,24 +20,4 @@ class PuzzleGenerator
 		 puzzle
 	end 
 
-	def self.generate_box 
-		(1..9).sort_by { rand }
-	end
-
-	def self.solve grid
-		start_time, current_state, stop_looping = time_now, Grid::NUMBER_OF_SQUARES, false
-		while !grid.fully_solved? && !stop_looping
-			grid.squares.each { |square| grid.solve_square_in square.index }
-			new_state = grid.squares.count(&:solved?)
-			stop_looping = true if current_state == new_state || grid.too_much_time_since(start_time, 0.75)
-			current_state = new_state
-		end
-		grid.try_again unless grid.fully_solved? || grid.too_much_time_since(start_time, 1.50)
-		grid.fully_solved?
-	end
-
-	def self.time_now
-		Time.now
-	end
-
 end
