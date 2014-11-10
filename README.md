@@ -156,7 +156,7 @@ To generate a new puzzle, run:
 
 ##Testing
 
-Tests were written with [Rspec](http://rspec.info/) (3.0.4).
+Tests were written with [Rspec](http://rspec.info/) (3.1.0).
 
 To run the testing suite in terminal: 
 
