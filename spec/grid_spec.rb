@@ -30,7 +30,7 @@ describe Grid do
 
 	it "can find the peers of a square" do
 		index_of_peers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 18, 19, 20, 27, 36, 45, 54, 63, 72]
-		peers = grid.peers_for 0
+		peers = grid.peers_for grid.squares[0]
 		peers.each_with_index do |peer, index|
 			expect(peer.index).to eq index_of_peers[index]
 		end
@@ -40,7 +40,7 @@ describe Grid do
    		puzzle = '015003002000100906270068430490002017501040380003905000900081040860070025037204600'
    		grid = Grid.new puzzle
 		peers_values = [1, 2, 3, 4, 5, 7, 8, 9]
-		peers = grid.peers_for 0
+		peers = grid.peers_for grid.squares[0]
 		expect(grid.values_of peers).to eq peers_values
     end
 

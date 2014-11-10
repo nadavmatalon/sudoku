@@ -11,35 +11,40 @@ class Grid
 	MEDIUM_PUZZLE = '000200001060075000057004060900000608000080000005630040500003000002000930708000014'
 	HARD_PUZZLE = '800000000003600000070090200050007000000045700000100030001000068008500010090000400'
 
-	attr_reader :squares
-
 	def initialize (puzzle = nil)
-		@squares = generate_squares
-		upload puzzle unless puzzle.nil?
+		generate_squares
+		upload puzzle if puzzle
 	end
  
+	def squares 
+		@squares ||= []
+	end
+
 	def generate_squares
- 		squares, row, column, box, value = [], 1, 1, 1, 0
+		row, column, box, value = 1, 1, 1, 0
 		for index in 1..NUMBER_OF_SQUARES do
 			squares << Square.new(index - 1, row, column, box, value)
 			column < 9 ? column += 1 : (column = 1 ; row += 1)
-			box += 1 if ((column - 1) % 3) == 0
-			box = 1 if index % 9 == 0 && row <= 3
-			box = 4 if index % 9 == 0 && row >= 4 && row <= 6
-			box = 7 if index % 9 == 0 && row >= 7
-		end 
-		squares		
- 	end
+			box = set_box_value(index, row, column, box)
+		end
+	end 
+
+ 	def set_box_value index, row, column, box
+		box += 1 if ((column - 1) % 3) == 0
+		box = 1 if index % 9 == 0 && row <= 3
+		box = 4 if index % 9 == 0 && row >= 4 && row <= 6
+		box = 7 if index % 9 == 0 && row >= 7
+		box
+	end
 
   	def upload puzzle
-		squares.each_with_index { |sq, i| sq.value = puzzle.chars[i].to_i }
+		squares.each_with_index { |square, index| square.value = puzzle.chars[index].to_i }
   	end	
 
-	def peers_for index
-		selected = squares[index]
-		row, column, box = selected.row, selected.column, selected.box
-		peers = squares.select { |sq| sq if sq.row == row || sq.column == column || sq.box == box }
- 	 	peers - [selected]
+	def peers_for selected_square
+		row, column, box = selected_square.row, selected_square.column, selected_square.box
+		peers = squares.select { |square| square if square.row == row || square.column == column || square.box == box }
+ 	 	peers - [selected_square]
 	end
 
 	def values_of peers
@@ -47,7 +52,7 @@ class Grid
 	end
 
 	def candidates_for index
-		candidates = (1..9).to_a - values_of(peers_for index)
+		candidates = (1..9).to_a - values_of(peers_for squares[index])
 		unsolved?(index) ? candidates.sort : []
 	end
 
@@ -64,11 +69,15 @@ class Grid
 		while !fully_solved? && !stop_looping
 			squares.each { |square| solve_square_in square.index }
 			new_state = squares.count(&:solved?)
-			stop_looping = true if current_state == new_state || Time.now - start_time > 0.75
+			stop_looping = true if current_state == new_state || too_much_time_since(start_time, 0.75)
 			current_state = new_state
 		end
-		try_again unless fully_solved? || Time.now - start_time > 1.50
-		fully_solved? ? "SOLVED IT!" : "COULDN'T SOLVE IT!"
+		try_again unless fully_solved? || too_much_time_since(start_time, 1.50)
+		fully_solved? ? 'SOLVED IT!' : 'COULDN\'T SOLVE IT!'
+	end
+
+	def too_much_time_since start_time, interval_in_seconds
+		Time.now - start_time > interval_in_seconds
 	end
 
   	def solve_square_in index
@@ -107,15 +116,21 @@ class Grid
 	end
 
 	def print_in_terminal
- 		puts ""
-		squares.select  do |square|
-			index = square.index + 1
-			print square.value.to_s + " "
-			print "| " if index % 3 == 0 && index % 9 != 0
-			puts "" if index % 9 == 0
-			puts "-" * 21 if index % 27 == 0 && index != NUMBER_OF_SQUARES
-		end
-		puts ""
+ 		puts grid_string_for_print
 	end	
+
+	def grid_string_for_print
+		string = "\n"
+		squares.select do |square|
+			index = square.index + 1
+			string += square.value.to_s + " "
+			string += "| " if index % 3 == 0 && index % 9 != 0
+			string += "\n" if index % 9 == 0
+			string += "-" * 21 + "\n" if index % 27 == 0 && index != NUMBER_OF_SQUARES
+		end
+		string += "\n"
+	end
+
+
 end
 
