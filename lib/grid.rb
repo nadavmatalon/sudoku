@@ -116,19 +116,15 @@ class Grid
 	end
 
 	def print_in_terminal
- 		puts grid_string_for_print
+ 		puts grid_str_for_print
 	end	
 
-	def grid_string_for_print
-		string = "\n"
-		squares.select do |square|
-			index = square.index + 1
-			string += square.value.to_s + " "
-			string += "| " if index % 3 == 0 && index % 9 != 0
-			string += "\n" if index % 9 == 0
-			string += "-" * 21 + "\n" if index % 27 == 0 && index != NUMBER_OF_SQUARES
-		end
-		string += "\n"
+	def grid_str_for_print
+	 	rows = current_state.chars.each_slice(9).map do |row|
+	 		row.insert(3, '|').insert(7, '|').insert(11, "\n").join(' ')
+	 	end
+		separator = '-' * 21 + "\n"
+		rows.insert(3, separator).insert(7, separator).join(' ').insert(0, ' ')
 	end
 
 	def map_random_values_to box_number
