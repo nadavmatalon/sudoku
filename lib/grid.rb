@@ -131,6 +131,15 @@ class Grid
 		string += "\n"
 	end
 
+	def map_random_values_to box_number
+		random_values = (1..9).sort_by { rand }
+		selected_squares = find_square_indexes_of box_number
+		selected_squares.each_with_index { |square, index| squares[square].value = random_values[index] }
+	end
+
+	def find_square_indexes_of box_number
+		squares.map { |square | square.index if square.box == box_number }.compact
+	end
 
 end
 
