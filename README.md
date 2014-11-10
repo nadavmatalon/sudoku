@@ -63,7 +63,7 @@ Here's a brief description of the game:
 (Source: [Wikipedia on Sudoku](http://en.wikipedia.org/wiki/Sudoku))
 
 
-##Main Functionality
+##Functional Description
 
 The code offers the following main UI functions:<br/>
 (see the [How to Install and Run Locally](#how-to-install-and-run-locally) 
