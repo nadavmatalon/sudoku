@@ -79,9 +79,8 @@ class Grid
 	end
 
   	def solve_square_in index
-  		if unsolved? index
-  			candidates = candidates_for index
-  			squares[index].value = candidates.first if candidates.count == 1
+  		if unsolved?(index) && candidates_for(index).count == 1
+  			squares[index].value = candidates_for(index).first
   		end
 	end
 
@@ -92,8 +91,7 @@ class Grid
 
 	def try_again
 		empty_square = squares.reject(&:solved?).first
-		candidates = candidates_for empty_square.index
-		candidates.each do |candidate|
+ 		candidates_for(empty_square.index).each do |candidate|
 			empty_square.set candidate
 			grid = self.class.new(self.current_state)
 			grid.solve

@@ -100,12 +100,12 @@ describe Grid do
 		expect(grid.fully_solved?).to be true
     end
 
-    it "can duplicate itself" do
-  		puzzle = '015003002000100906270068430490002017501040380003905000900081040860070025037204600'
-		grid = Grid.new puzzle
-		copy = grid.duplicate
-		expect(copy.current_state).to eq grid.current_state
-    end
+  #   it "can duplicate itself" do
+  # 		puzzle = '015003002000100906270068430490002017501040380003905000900081040860070025037204600'
+		# grid = Grid.new puzzle
+		# copy = grid.duplicate
+		# expect(copy.current_state).to eq grid.current_state
+  #   end
 
     it "can solve an empty puzzle" do
 		grid = Grid.new
