@@ -1,5 +1,5 @@
 class Square
- 
+
 	attr_accessor :index, :row, :column, :box, :value
 
 	def initialize (index = nil, row = nil, column = nil, box = nil, value = 0)
@@ -19,8 +19,8 @@ class Square
 	end
 
 	def set value
-    	@value = value
-  	end
+		@value = value
+	end
 
 end
 
