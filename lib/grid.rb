@@ -84,23 +84,17 @@ class Grid
   		end
 	end
 
-	def legit_solution? index, value
-		candidates = candidates_for index
-		candidates.include? value
-	end
-
 	def try_again
 		empty_square = squares.reject(&:solved?).first
  		candidates_for(empty_square.index).each do |candidate|
 			empty_square.set candidate
 			grid = self.class.new(self.current_state)
-			grid.solve
-			upload grid.current_state and return if grid.fully_solved?
+			upload grid.current_state and return if grid.solve == 'SOLVED IT!'
 		end
 	end
 
-  	def current_state 
-  		squares.map {|square| square.value}.join
+  	def current_state
+  		squares.map { |square| square.value }.join
   	end
 
 	def print_in_terminal
@@ -122,7 +116,7 @@ class Grid
 	end
 
 	def find_square_indexes_of box_number
-		squares.map { |square | square.index if square.box == box_number }.compact
+		squares.map { |square| square.index if square.box == box_number }.compact
 	end
 
 end
