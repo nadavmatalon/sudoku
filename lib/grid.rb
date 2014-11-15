@@ -123,5 +123,11 @@ class Grid
 			set_value_at(random_square, 0) and punches -= 1 if solved_at?(random_square)
 		end
 	end
+
+	def str_for_print
+		separator = '-' * 21 + "\n"
+		rows = puzzle_rows.each { |row| row.insert(3, '|').insert(7, '|').insert(11, "\n").join(' ') }
+		rows.insert(3, separator).insert(7, separator).join(' ').prepend("\n ").concat("\n")
+	end
 end
 
