@@ -104,6 +104,14 @@ class Grid
 		puzzle.map.with_index { |value, index| index if value == 0 }.compact.first
 	end
 
+	def check_solution
+		check_result = []
+		for element in [puzzle_rows, puzzle_columns, puzzle_boxes]
+			check_result << element.map { |unit| unit.sort == (1..9).to_a }
+		end
+		check_result.flatten.uniq == [true]
+	end
+
 	def upload_new_puzzle (level = 3)
 		upload_new_puzzle_seed
 		solve_puzzle ? punch_puzzle(level * 10 + 21) : upload_new_puzzle(level)

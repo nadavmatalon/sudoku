@@ -39,8 +39,12 @@ describe Grid do
 
         context 'current_state' do
 
-            it 'grid can export the current state of it\'s puzzle' do
+            it 'grid can convert the current state of it\'s puzzle to a simple string' do
                 expect(grid_with_puzzle.puzzle_to_str).to eq puzzle
+            end
+
+            it 'grid can convert the current state of it\'s puzzle to a printable string' do
+                puts grid_with_puzzle.str_for_print
             end
         end
 
@@ -188,20 +192,28 @@ describe Grid do
         end
     end
 
-    context 'current state' do
+    context 'solution' do
 
-        it 'grid knows if it\'s not fully solved' do
+        it 'grid knows if it\'s puzzle is not fully solved' do
             expect(grid.fully_solved?).to be_falsey
             expect(grid_with_puzzle.fully_solved?).to be_falsey
         end
 
-        it 'grid knows if it\'s fully solved' do
+        it 'grid knows if it\'s puzzle is fully solved' do
             grid_with_puzzle.solve_puzzle
             expect(grid_with_puzzle.fully_solved?).to be true
         end
+ 
+        it 'grid can check if it\'s puzzle is fully solved' do
+            expect(grid_with_puzzle.check_solution).to be false
+            grid_with_puzzle.solve_puzzle
+            expect(grid_with_puzzle.check_solution).to be true
+        end
 
-        it 'grid can print the grid\'s current state in terminal' do
-            puts grid_with_puzzle.str_for_print
+        it 'grid can check if it\'s puzzle is correctly solved' do
+            grid_with_puzzle.solve_puzzle
+            grid.set_value_at 0, 4
+            expect(grid.check_solution).to be false
         end
     end
 end
