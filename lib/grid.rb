@@ -1,5 +1,11 @@
 class Grid
 
+	DIAGONAL_BOXES_INDICES = [
+		[0, 1, 2, 9, 10, 11, 18, 19, 20], 
+		[30, 31, 32, 39, 40, 41, 48, 49, 50], 
+		[60, 61, 62, 69, 70, 71, 78, 79, 80]
+	]
+
 	attr_accessor :puzzle
 
 	def initialize (puzzle = '0' * 81)
@@ -65,7 +71,7 @@ class Grid
 		set_value_at(index, solutions.first) if solutions.count == 1
 	end
 
-	def solve
+	def solve_puzzle
 		first_attempt_to_solve
 		second_attempt_to_solve unless fully_solved?
 		fully_solved?
@@ -74,28 +80,48 @@ class Grid
 	def first_attempt_to_solve
 		current_puzzle_state, stop_looping = 81, false
 		while !fully_solved? && !stop_looping
-			new_puzzle_state = solve_all_squares
+			new_puzzle_state = solve_each_square
 			stop_looping = true if current_puzzle_state == new_puzzle_state
 			current_puzzle_state = new_puzzle_state
 		end
 	end
 
 	def second_attempt_to_solve
-		empty_index = find_first_empty_index
+		empty_index = find_first_unsolved_square
  		candidates_for(empty_index).each do |candidate|
 			set_value_at empty_index, candidate
 			grid = self.class.new(self.puzzle_to_str)
-			upload grid.puzzle_to_str and return if grid.solve
+			upload grid.puzzle_to_str and return if grid.solve_puzzle
 		end
 	end
 
-	def solve_all_squares
+	def solve_each_square
 		puzzle.each_with_index { |square, index| solve_at(index) }
 		puzzle.count { |value| value != 0 }
 	end
 
-	def find_first_empty_index
+	def find_first_unsolved_square
 		puzzle.map.with_index { |value, index| index if value == 0 }.compact.first
+	end
+
+	def upload_new_puzzle (level = 3)
+		upload_new_puzzle_seed
+		solve_puzzle ? punch_puzzle(level * 10 + 21) : upload_new_puzzle(level)
+	end
+
+	def upload_new_puzzle_seed
+		puzzle = Array.new(81, 0)
+		for index in 0..2
+			new_values = (1..9).to_a.shuffle
+			DIAGONAL_BOXES_INDICES[index].map.with_index { |square, pos| set_value_at(square, new_values[pos]) }
+		end
+	end
+
+	def punch_puzzle punches
+		while punches > 0
+			random_square = rand(0..80)
+			set_value_at(random_square, 0) and punches -= 1 if solved_at?(random_square)
+		end
 	end
 
 	def str_for_print
