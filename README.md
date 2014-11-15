@@ -1,5 +1,7 @@
 #SUDOKU
 
+[![Code Climate](https://codeclimate.com/github/nadavmatalon/sudoku/badges/gpa.svg)](https://codeclimate.com/github/nadavmatalon/sudoku)
+
 ## Table of Contents
 
 * [Screenshots](#screenshots)
