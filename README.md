@@ -111,16 +111,15 @@ The Grid class contains the following `constructors` and `instance methods`:
 
 | Method  | Description                                                            |
 |----------|-----------------------------------------------------------------------|
-| .upload(puzzle) | uploads a provided puzzle to the grid                          |
+| .upload(puzzle) | uploads a puzzle to the grid                                   |
 | .upload_new_puzzle(level) | uploads a new puzzle to a grid (level of difficulty can be specified between 1-5; default is: 3) |
 | .get_value_at(index) | returns the value of the square at the specified index (0-80) | 
 | .set_value_at(index, value) | sets the value of the square at the specified index (0-80) | 
 | .solve_at(index) | attempts to solve the square at the specified index (0-80)    | 
 | .solve_puzzle   | generates a complete solution for the puzzle                   |
+| .puzzle_solved? | returns a boolean (true => puzzle is solved ; false => it's not) |
 | .str_for_print  | returns a string of the current state of the grid's puzzle formatted for prining in the terminal |
 | .puzzle_to_str | returns a String with the current state of the grid's puzzle    |
-| .fully_solved? | returns a boolean (true => grid is fully solved ; false => it's not) |
-| .candidates_for(index) | returns an Array with possible solutions to a square at a specified index (0-80) | 
 
 * A `puzzle` is a String with 81 chars (each char must have value of 0-9).
 
