@@ -1,11 +1,5 @@
 class Grid
 
-	DIAGONAL_BOXES_INDICES = [
-		[0, 1, 2, 9, 10, 11, 18, 19, 20], 
-		[30, 31, 32, 39, 40, 41, 48, 49, 50], 
-		[60, 61, 62, 69, 70, 71, 78, 79, 80]
-	]
-
 	attr_accessor :puzzle
 
 	def initialize (puzzle = '0' * 81)
@@ -34,7 +28,7 @@ class Grid
 
 	def puzzle_solved?
 		square_values = puzzle_rows + puzzle_columns + puzzle_boxes
-		square_values.map { |values| values.sort == (1..9).to_a }.uniq == [true]
+		square_values.map { |values| values.sort == (1..9).to_a }.all?
 	end
 
 	def puzzle_rows
@@ -47,9 +41,13 @@ class Grid
 
 	def puzzle_boxes
 		(0..2).reduce([]) do |boxes, index|
-			selected_rows = puzzle_rows.slice(3 * index, 3)
-			boxes + selected_rows.transpose.each_slice(3).map(&:flatten)
+			boxes + puzzle_rows.slice(3 * index, 3).transpose.each_slice(3).map(&:flatten)
 		end
+	end
+
+	def find_indices_of_boxes *box_numbers
+		grid_clone, grid_clone.puzzle = self.clone, (0..80).to_a
+		box_numbers.map { |box| grid_clone.puzzle_boxes[box] }
 	end
 
 	def peer_values_of index
@@ -58,8 +56,8 @@ class Grid
 	end
 
 	def find_box_of index
-		new_grid, new_grid.puzzle = self.clone, Array.new(81) { |index| index }
-		new_grid.puzzle_boxes.map { |boxes| boxes & [index] }.map.with_index { |box ,index| index unless box.empty? }.compact[0]
+		grid_clone, grid_clone.puzzle = self.clone, (0..80).to_a
+		grid_clone.puzzle_boxes.map { |boxes| boxes & [index] }.index([index])
 	end
 
 	def candidates_for index
@@ -98,7 +96,7 @@ class Grid
 
 	def solve_all_squares
 		puzzle.each_with_index { |square, index| solve_at(index) }
-		puzzle.count { |square_value| square_value != 0 }
+		puzzle.count { |square| square != 0 }
 	end
 
 	def find_first_unsolved_square
@@ -111,10 +109,10 @@ class Grid
 	end
 
 	def upload_new_puzzle_seed
-		puzzle = Array.new(81, 0)
+		puzzle, boxes = Array.new(81, 0), find_indices_of_boxes(0, 4, 8)
 		for index in 0..2
 			new_values = (1..9).to_a.shuffle
-			DIAGONAL_BOXES_INDICES[index].map.with_index { |square, pos| set_value_at(square, new_values[pos]) }
+			boxes[index].map.with_index { |square, pos| set_value_at(square, new_values[pos]) }
 		end
 	end
 
