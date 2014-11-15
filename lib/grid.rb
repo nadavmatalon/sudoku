@@ -32,8 +32,9 @@ class Grid
 		get_value_at(index) != 0
 	end
 
-	def fully_solved?
-		return true unless puzzle.include? 0
+	def puzzle_solved?
+		square_values = puzzle_rows + puzzle_columns + puzzle_boxes
+		square_values.map { |values| values.sort == (1..9).to_a }.uniq == [true]
 	end
 
 	def puzzle_rows
@@ -73,14 +74,14 @@ class Grid
 
 	def solve_puzzle
 		first_attempt_to_solve
-		second_attempt_to_solve unless fully_solved?
-		fully_solved?
+		second_attempt_to_solve unless puzzle_solved?
+		puzzle_solved?
 	end
 
 	def first_attempt_to_solve
 		current_puzzle_state, stop_looping = 81, false
-		while !fully_solved? && !stop_looping
-			new_puzzle_state = solve_each_square
+		while !puzzle_solved? && !stop_looping
+			new_puzzle_state = solve_all_squares
 			stop_looping = true if current_puzzle_state == new_puzzle_state
 			current_puzzle_state = new_puzzle_state
 		end
@@ -95,21 +96,13 @@ class Grid
 		end
 	end
 
-	def solve_each_square
+	def solve_all_squares
 		puzzle.each_with_index { |square, index| solve_at(index) }
-		puzzle.count { |value| value != 0 }
+		puzzle.count { |square_value| square_value != 0 }
 	end
 
 	def find_first_unsolved_square
-		puzzle.map.with_index { |value, index| index if value == 0 }.compact.first
-	end
-
-	def check_solution
-		check_result = []
-		for element in [puzzle_rows, puzzle_columns, puzzle_boxes]
-			check_result << element.map { |unit| unit.sort == (1..9).to_a }
-		end
-		check_result.flatten.uniq == [true]
+		puzzle.index(0)
 	end
 
 	def upload_new_puzzle (level = 3)

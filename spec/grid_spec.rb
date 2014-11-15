@@ -194,26 +194,25 @@ describe Grid do
 
     context 'solution' do
 
-        it 'grid knows if it\'s puzzle is not fully solved' do
-            expect(grid.fully_solved?).to be_falsey
-            expect(grid_with_puzzle.fully_solved?).to be_falsey
+        it 'grid knows if current puzzle is not solved' do
+            expect(grid.puzzle_solved?).to be_falsey
+            expect(grid_with_puzzle.puzzle_solved?).to be_falsey   
         end
 
-        it 'grid knows if it\'s puzzle is fully solved' do
+        it 'grid knows if current puzzle is solved' do
             grid_with_puzzle.solve_puzzle
-            expect(grid_with_puzzle.fully_solved?).to be true
+            expect(grid_with_puzzle.puzzle_solved?).to be true
         end
  
-        it 'grid can check if it\'s puzzle is fully solved' do
-            expect(grid_with_puzzle.check_solution).to be false
+        it 'grid knows if current puzzle solution is correct' do
             grid_with_puzzle.solve_puzzle
-            expect(grid_with_puzzle.check_solution).to be true
+            expect(grid_with_puzzle.puzzle_solved?).to be true
         end
 
-        it 'grid can check if it\'s puzzle is correctly solved' do
+        it 'grid knows if current puzzle solution is incorrect' do
             grid_with_puzzle.solve_puzzle
-            grid.set_value_at 0, 4
-            expect(grid.check_solution).to be false
+            grid_with_puzzle.set_value_at 0, 4
+            expect(grid_with_puzzle.puzzle_solved?).to be false
         end
     end
 end
