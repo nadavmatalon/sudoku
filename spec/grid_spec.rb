@@ -192,18 +192,6 @@ describe Grid do
         end
     end
 
-    context 'boxes' do
-        it 'grid can find the indices of a box based on it\'s number' do
-            expect(grid.indices_of_box 0).to eq [0, 1, 2, 9, 10, 11, 18, 19, 20]
-            expect(grid.indices_of_box 8).to eq [60, 61, 62, 69, 70, 71, 78, 79, 80]
-        end
-
-        it 'grid can find the indices of more than one box based on their numbers' do
-            indices = [[3, 4, 5, 12, 13, 14, 21, 22, 23], [6, 7, 8, 15, 16, 17, 24, 25, 26]]
-            expect(grid.indices_of_box 1, 2).to eq indices
-        end
-    end
-
     context 'solution' do
 
         it 'grid knows if current puzzle is not solved' do

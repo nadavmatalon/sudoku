@@ -1,5 +1,11 @@
 class Grid
 
+	DIAGONAL_BOXES_INDICES = [
+		[0, 1, 2, 9, 10, 11, 18, 19, 20], 
+		[30, 31, 32, 39, 40, 41, 48, 49, 50], 
+		[60, 61, 62, 69, 70, 71, 78, 79, 80]
+	]
+
 	attr_accessor :puzzle
 
 	def initialize (puzzle = '0' * 81)
@@ -104,17 +110,11 @@ class Grid
 	end
 
 	def upload_new_puzzle_seed
-		puzzle, indices = Array.new(81, 0), indices_of_box(0, 4, 8)
+		puzzle = Array.new(81, 0)
 		for index in 0..2
 			new_values = (1..9).to_a.shuffle
-			indices[index].map.with_index { |square, position| set_value_at(square, new_values[position]) }
+			DIAGONAL_BOXES_INDICES[index].map.with_index { |square, position| set_value_at(square, new_values[position]) }
 		end
-	end
-
-	def indices_of_box *box_number
-		grid_clone, grid_clone.puzzle = self.clone, (0..80).to_a
-		indices = box_number.collect { |box| grid_clone.puzzle_boxes[box].sort }
-		box_number.count > 1 ? indices : indices.first
 	end
 
 	def punch_puzzle punches
