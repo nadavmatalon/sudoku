@@ -40,7 +40,7 @@ describe Grid do
         context 'current_state' do
 
             it 'grid can convert the current state of it\'s puzzle to a simple string' do
-                expect(grid_with_puzzle.puzzle_to_str).to eq puzzle
+                expect(grid_with_puzzle.puzzle.join).to eq puzzle
             end
 
             it 'grid can convert the current state of it\'s puzzle to a printable string' do
@@ -58,7 +58,7 @@ describe Grid do
             it 'grid can upload a random puzzle' do
                 grid.upload_new_puzzle
                 expect(grid.puzzle.count).to eq 81
-                expect(grid.puzzle_to_str).not_to eq ('0' * 81)
+                expect(grid.puzzle.join).not_to eq ('0' * 81)
             end
 
             it 'grid uploads a medium puzzle (difficulty level 3) by default' do
