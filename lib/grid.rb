@@ -17,7 +17,11 @@ class Grid
 	def set_value_at index, value
 		puzzle[index] = value
 	end
-	
+
+	def puzzle_to_str
+		@puzzle.join
+	end
+
 	def solved_at? index
 		get_value_at(index) != 0
 	end
@@ -80,8 +84,8 @@ class Grid
 		empty_index = find_first_unsolved_square
  		candidates_for(empty_index).each do |candidate|
 			set_value_at empty_index, candidate
-			grid = self.class.new(self.puzzle.join)
-			upload grid.puzzle.join and return if grid.solve_puzzle
+			grid = self.class.new(self.puzzle_to_str)
+			upload grid.puzzle_to_str and return if grid.solve_puzzle
 		end
 	end
 
@@ -118,12 +122,6 @@ class Grid
 			random_square = rand(0..80)
 			set_value_at(random_square, 0) and punches -= 1 if solved_at?(random_square)
 		end
-	end
-
-	def str_for_print
-		separator = '-' * 21 + "\n"
-		rows = puzzle_rows.each { |row| row.insert(3, '|').insert(7, '|').insert(11, "\n").join(' ') }
-		rows.insert(3, separator).insert(7, separator).join(' ').prepend("\n ").concat("\n")
 	end
 end
 
