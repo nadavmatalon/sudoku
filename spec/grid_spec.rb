@@ -175,12 +175,12 @@ describe Grid do
             end
         end
 
-        context 'box' do
+        context 'boxes' do
 
             it 'grid can find the box number of a square based on it\'s index' do
-                [10, 13, 16].each_with_index { |value, index| expect(grid.find_box_of value).to eq index }
-                [37, 40, 43].each_with_index { |value, index| expect(grid.find_box_of value).to eq index+3 }
-                [64, 67, 70].each_with_index { |value, index| expect(grid.find_box_of value).to eq index+6 }
+                [10, 13, 16].each_with_index { |value, index| expect(grid.box_of value).to eq index }
+                [37, 40, 43].each_with_index { |value, index| expect(grid.box_of value).to eq index+3 }
+                [64, 67, 70].each_with_index { |value, index| expect(grid.box_of value).to eq index+6 }
             end
         end
 
@@ -189,6 +189,18 @@ describe Grid do
             it 'grid can find all peer values of a square based on it\'s index' do
                 expect(grid_with_puzzle.peer_values_of 40).to eq [1, 3, 4, 5, 6, 8, 9]
             end
+        end
+    end
+
+    context 'boxes' do
+        it 'grid can find the indices of a box based on it\'s number' do
+            expect(grid.indices_of_box 0).to eq [0, 1, 2, 9, 10, 11, 18, 19, 20]
+            expect(grid.indices_of_box 8).to eq [60, 61, 62, 69, 70, 71, 78, 79, 80]
+        end
+
+        it 'grid can find the indices of more than one box based on their numbers' do
+            indices = [[3, 4, 5, 12, 13, 14, 21, 22, 23], [6, 7, 8, 15, 16, 17, 24, 25, 26]]
+            expect(grid.indices_of_box 1, 2).to eq indices
         end
     end
 

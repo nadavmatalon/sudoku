@@ -45,17 +45,12 @@ class Grid
 		end
 	end
 
-	def find_indices_of_boxes *box_numbers
-		grid_clone, grid_clone.puzzle = self.clone, (0..80).to_a
-		box_numbers.map { |box| grid_clone.puzzle_boxes[box] }
-	end
-
 	def peer_values_of index
-		peers = puzzle_rows[index/9] + puzzle_columns[index%9] + puzzle_boxes[find_box_of(index)]
+		peers = puzzle_rows[index/9] + puzzle_columns[index%9] + puzzle_boxes[box_of(index)]
 		peers.flatten.sort.uniq.reject { |value| value == (0 or value_of(index)) }
 	end
 
-	def find_box_of index
+	def box_of index
 		grid_clone, grid_clone.puzzle = self.clone, (0..80).to_a
 		grid_clone.puzzle_boxes.map { |boxes| boxes & [index] }.index([index])
 	end
@@ -109,11 +104,17 @@ class Grid
 	end
 
 	def upload_new_puzzle_seed
-		puzzle, boxes = Array.new(81, 0), find_indices_of_boxes(0, 4, 8)
+		puzzle, indices = Array.new(81, 0), indices_of_box(0, 4, 8)
 		for index in 0..2
 			new_values = (1..9).to_a.shuffle
-			boxes[index].map.with_index { |square, pos| set_value_at(square, new_values[pos]) }
+			indices[index].map.with_index { |square, position| set_value_at(square, new_values[position]) }
 		end
+	end
+
+	def indices_of_box *box_number
+		grid_clone, grid_clone.puzzle = self.clone, (0..80).to_a
+		indices = box_number.collect { |box| grid_clone.puzzle_boxes[box].sort }
+		box_number.count > 1 ? indices : indices.first
 	end
 
 	def punch_puzzle punches
