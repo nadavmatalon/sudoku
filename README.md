@@ -1,5 +1,7 @@
 #SUDOKU
 
+[![Code Climate](https://codeclimate.com/github/nadavmatalon/sudoku/badges/gpa.svg)](https://codeclimate.com/github/nadavmatalon/sudoku)
+
 ## Table of Contents
 
 * [Screenshots](#screenshots)
@@ -41,13 +43,20 @@
 
 This app implements the logic for the game of __Sudoku__.
 
-It was written in [Ruby](https://www.ruby-lang.org/en/) according to [TDD](http://en.wikipedia.org/wiki/Test-driven_development) using [Rspec](http://rspec.info/). 
+It was written following the course at 
+[Makers Academy](http://www.makersacademy.com/) 
+as an exercise in buiding the back-end logic of an app with 
+[Ruby 2.1](https://www.ruby-lang.org/en/) using
+[TDD](http://en.wikipedia.org/wiki/Test-driven_development) 
+methodology (tests written with [Rspec](http://rspec.info/)).
+
+__Update (14.11.14)__ : I've re-written the app from scratch 
+to generate a more cohesive and cleaner code.
 
 
 ##What is Soduko
 
 Here's a brief description of the game:
-
 
 >__Sudoku__ is a logic-based combinatorial number-placement puzzle. 
 >
@@ -68,10 +77,9 @@ Here's a brief description of the game:
 The code offers the following main UI functions:<br/>
 (see the [How to Install and Run Locally](#how-to-install-and-run-locally) 
 section below for a detailed account of the code's classes and methods):
-* Creating a new Soduko grid (empty or with an uploaded puzzle)
-* Generating new puzzles  - difficulty levels ranging from 'Very Easy' to 'Very Hard' (1-5)
-* Uploading a puzzle to the grid
-* Printing the grid in terminal
+* Creating a new Soduko grid (empty or with a new puzzle)
+* Uploading new puzzles - difficulty levels ranging from 'Very Easy' to 'Very Hard' (1-5)
+* Printing the grid's current state in the terminal
 * Generating a complete solution for the puzzle
 
 
@@ -81,12 +89,14 @@ To run the code in terminal, clone the repo locally and run:
 
 ```bash
 $> cd sudoku
+$> bundle install
 $> irb
->> require './lib/sudoku.rb'
+>> require './lib/grid.rb'
 ```
 
 After that, you can use the following main constructors and methods for 
-the __Grid__ and __PuzzleGenerator__ classes<br/> 
+the __Grid__ class
+
 (additional supporting classes and methods can be found in the code itself):
 
 
@@ -99,18 +109,22 @@ The Grid class contains the following `constructors` and `instance methods`:
 | Grid.new | returns a new (empty) instance of a grid with 9x9 squares             |
 | Grid.new(puzzle) | returns a new instance of a grid with a pre-loaded puzzle (see definition of a 'puzzle' below) | 
 
-| Method  | Description                                                           |
+| Method  | Description                                                            |
 |----------|-----------------------------------------------------------------------|
-| .upload(puzzle) | uploads a puzzle to a grid instance                           |
-| .solve   | generates a complete solution for the puzzle                          |
-| .print_in_terminal  | prints the grid instace in the terminal                    |
-| .current_state | returns a String with the current state of the grid (ie value of each square) |
+| .upload(puzzle) | uploads a provided puzzle to the grid                          |
+| .upload_new_puzzle(level) | uploads a new puzzle to a grid (level of difficulty can be specified between 1-5; default is: 3) |
+| .get_value_at(index) | returns the value of the square at the specified index (0-80) | 
+| .set_value_at(index, value) | sets the value of the square at the specified index (0-80) | 
+| .solve_at(index) | attempts to solve the square at the specified index (0-80)    | 
+| .solve_puzzle   | generates a complete solution for the puzzle                   |
+| .str_for_print  | returns a string of the current state of the grid's puzzle formatted for prining in the terminal |
+| .puzzle_to_str | returns a String with the current state of the grid's puzzle    |
 | .fully_solved? | returns a boolean (true => grid is fully solved ; false => it's not) |
-| .candidates_for(index) | returns an Array with possible solutions to a square at a given index (0-80) | 
+| .candidates_for(index) | returns an Array with possible solutions to a square at a specified index (0-80) | 
 
 * A `puzzle` is a String with 81 chars (each char must have value of 0-9).
 
-Here are three example of `puzzles` you can use:
+Here are three example of `puzzle-strings` you can use when playing with the above methods:
 
 ```ruby
 easy_puzzle =   '015003002000100906270068430490002017501040380003905000900081040860070025037204600'
@@ -119,40 +133,6 @@ medium_puzzle = '000200001060075000057004060900000608000080000005630040500003000
 
 hard_puzzle =   '800000000003600000070090200050007000000045700000100030001000068008500010090000400'
 ```
-
-###PuzzleGenerator Class
-
-The PuzzleGenerator uses `class` methods to generate random puzzles.
-
-Puzzles can be createsd with a difficulty level between 1-5 ('Very Easy' to 'Very Hard').
-
-The default difficulty level if no argument is given is 3.
-
-The level of difficulty is based on the number of empty squares (designated by the value 0)
-in the puzzle (the more empty squares there are the harder the puzzle).
-
-The PuzzleGenerator makes sure that every new puzzle is solvable.
-
-To generate a new puzzle, run:
-
-```ruby
-> PuzzleGenerator::generate_puzzle
-=> "600000400003000091041060230024093080000701000709020000000006009008279050000045800"
-
-> PuzzleGenerator::generate_puzzle 1
-=> "508013649423509087691740050007150000856000714000480500982075460715624003000891200"
-
-> PuzzleGenerator::generate_puzzle 2
-=> "005034078040207005061050300029083706536000480007005093000040509910500800050908042"
-
-> PuzzleGenerator::generate_puzzle 3
-=> "860007009052430008940006007230900005000005903509008001004090700000003010080000000"
-
-> PuzzleGenerator::generate_puzzle 4
-=> "006000000040008007050709000007000900000000050305000060070400000800000006004000079"
-
-> PuzzleGenerator::generate_puzzle 5
-=> "900010060000000000000000050010000000000000400300000800400070000000000000000000000"
 
 ```
 
@@ -170,6 +150,4 @@ $> rspec
 ##License
 
 <p>Released under the <a href="http://www.opensource.org/licenses/MIT">MIT license</a>.</p>
-
-
 
