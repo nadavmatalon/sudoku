@@ -12,7 +12,6 @@
 * [Testing](#testing)
 * [License](#license)
 
-
 ##Screenshots
 
 <table>
