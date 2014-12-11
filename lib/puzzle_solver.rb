@@ -19,7 +19,7 @@ module PuzzleSolver
   end
 
   def solve
-    first_attempt    
+    first_attempt
     second_attempt unless solved?
     solved?
   end
