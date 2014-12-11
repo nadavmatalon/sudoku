@@ -90,7 +90,7 @@ $> irb
 ##Functional Description
 
 The app is built around two classes: __Game__ &amp; __Puzzle__, and two modules: 
-__PuzzleGenerator__ and __PuzzleSolver.
+__PuzzleGenerator__ and __PuzzleSolver__.
 
 Using these classes &amp modules, the app can:
 
@@ -108,7 +108,7 @@ $> irb
 >> require './lib/game.rb'
 => true
 >> game = Game.new(1)
-// The above method generate a new game with a very easy puzzle (difficulty level: 1)
+## The above method generate a new game with a very easy puzzle (difficulty level: 1)
 >> game.puzzle_str
 => "092140607700285109035609800210008500369512748578406300053020961020001400080904270"
 >> game.solve_puzzle
@@ -116,7 +116,7 @@ $> irb
 >> game.puzzle_str
 => "892143657746285139135679824214738596369512748578496312453827961927361485681954273"
 >> game = Game.new(5)
-// The above method generate a new game with a very hard puzzle (difficulty level: 5)
+## The above method generate a new game with a very hard puzzle (difficulty level: 5)
 >> game.puzzle_str
 => "000100000004007000000908000010000000200830000800000000000000000000000000000000000"
 >> game.solve_puzzle
