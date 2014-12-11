@@ -52,10 +52,9 @@ methodology (tests written with [Rspec](http://rspec.info/)).
 __Update (14.11.14)__ : I've re-written the app from scratch 
 to generate a more cohesive and cleaner code.
 
-__Update (11.12.14)__ : Another round of deep code &amp; test refactoring, 
-this time splitting the single original Grid class into a Game and Puzzle classes, 
-as well as adding two new modules: PuzzleGenerator and PuzzleSolver which complement 
-the Puzzle class. 
+__Update (11.12.14)__ : Another round of deep code &amp; tests refactoring, 
+this time splitting the single original Grid class to __Game__ and __Puzzle__ classes, 
+as well as adding two new modules: __PuzzleGenerator__ and __PuzzleSolver__.
 
 
 ##What is Soduko
