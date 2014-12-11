@@ -7,8 +7,8 @@
 * [Screenshots](#screenshots)
 * [General Description](#general-description)
 * [What is Soduko](#what-is-soduko)
-* [Functional Description](#functional-description)
 * [How to Install and Run Locally](#how-to-install-and-run-locally)
+* [Functional Description](#functional-description)
 * [Testing](#testing)
 * [License](#license)
 
@@ -40,7 +40,7 @@
 
 ##General Description
 
-This app implements the logic for the game of __Sudoku__.
+This app implements the back-end logic for the game of __Sudoku__.
 
 It was written following the course at 
 [Makers Academy](http://www.makersacademy.com/) 
@@ -59,7 +59,7 @@ as well as adding two new modules: __PuzzleGenerator__ and __PuzzleSolver__.
 
 ##What is Soduko
 
-Here's a brief description of the game:
+For those who don't know it, Here's a brief description of the game:
 
 >__Sudoku__ is a logic-based combinatorial number-placement puzzle. 
 >
@@ -75,17 +75,6 @@ Here's a brief description of the game:
 (Source: [Wikipedia on Sudoku](http://en.wikipedia.org/wiki/Sudoku))
 
 
-##Functional Description
-
-The code offers the following main UI functions:<br/>
-(see the [How to Install and Run Locally](#how-to-install-and-run-locally) 
-section below for a detailed account of the code's classes and methods):
-* Creating a new Soduko grid (empty or with a new puzzle)
-* Uploading new puzzles - difficulty levels ranging from 'Very Easy' to 'Very Hard' (1-5)
-* Printing the grid's current state in the terminal
-* Generating a complete solution for the puzzle
-
-
 ##How to Install and Run Locally
 
 To run the code in terminal, clone the repo locally and run:
@@ -94,53 +83,52 @@ To run the code in terminal, clone the repo locally and run:
 $> cd sudoku
 $> bundle install
 $> irb
->> require './lib/grid.rb'
+>> require './lib/game.rb'
 ```
 
-After that, you can use the following main constructors and methods for 
-the __Grid__ class
 
-(additional supporting classes and methods can be found in the code itself):
+##Functional Description
 
+The app is built around two classes: __Game__ &amp; __Puzzle__, and two modules: 
+__PuzzleGenerator__ and __PuzzleSolver.
 
-###Grid Class
+Using these classes &amp modules, the app can:
 
-The Grid class contains the following `constructors` and `instance methods`:
+* Create a new game with a random Sudoku puzzle 
+* Puzzles can be generated at a specified difficulty level (from very easy to very hard)
+* Solve any given puzzle (though please note that some solutions take time...)
+* Check if a puzzle is solved
+* Upload a new puzzle to the game
+* Print the grid's current state in the terminal
 
-| Constructor  | Description                                                      |
-|----------|-----------------------------------------------------------------------|
-| Grid.new | returns a new (empty) instance of a grid with 9x9 squares             |
-| Grid.new(puzzle) | returns a new instance of a grid with a pre-loaded puzzle (see definition of a 'puzzle' below) | 
+Here's a quick demo of running the main constructor &amp; methods of the app:
 
-| Method  | Description                                                            |
-|----------|-----------------------------------------------------------------------|
-| .upload(puzzle) | uploads a puzzle to the grid                                   |
-| .upload_new_puzzle(level) | uploads a new puzzle to a grid (level of difficulty can be specified between 1-5; default is: 3) |
-| .get_value_at(index) | returns the value of the square at the specified index (0-80) | 
-| .set_value_at(index, value) | sets the value of the square at the specified index (0-80) | 
-| .solve_at(index) | attempts to solve the square at the specified index (0-80)    | 
-| .solve_puzzle   | generates a complete solution for the puzzle                   |
-| .puzzle_solved? | returns a boolean (true => puzzle is solved ; false => it's not) |
-| .str_for_print  | returns a string of the current state of the grid's puzzle formatted for prining in the terminal |
-| .puzzle_to_str | returns a String with the current state of the grid's puzzle    |
-
-* A `puzzle` is a String with 81 chars (each char must have value of 0-9).
-
-Here are three example of `puzzle-strings` you can use when playing with the above methods:
-
-```ruby
-easy_puzzle =   '015003002000100906270068430490002017501040380003905000900081040860070025037204600'
-
-medium_puzzle = '000200001060075000057004060900000608000080000005630040500003000002000930708000014'
-
-hard_puzzle =   '800000000003600000070090200050007000000045700000100030001000068008500010090000400'
+```bash
+$> irb
+>> require './lib/game.rb'
+=> true
+>> game = Game.new(1)
+// The above method generate a new game with a very easy puzzle (difficulty level: 1)
+>> game.puzzle_str
+=> "092140607700285109035609800210008500369512748578406300053020961020001400080904270"
+>> game.solve_puzzle
+=> true
+>> game.puzzle_str
+=> "892143657746285139135679824214738596369512748578496312453827961927361485681954273"
+>> game = Game.new(5)
+// The above method generate a new game with a very hard puzzle (difficulty level: 5)
+>> game.puzzle_str
+=> "000100000004007000000908000010000000200830000800000000000000000000000000000000000"
+>> game.solve_puzzle
+=> true
+>> game.puzzle_str
+=> "325146789984327156167958234413265897276839415859471362531792648642583971798614523"
 ```
 
-```
 
 ##Testing
 
-Tests were written with [Rspec](http://rspec.info/) (3.1.0).
+Tests were written with [Rspec](http://rspec.info/) (3.1.7).
 
 To run the testing suite in terminal, clone the repo and run: 
 
@@ -152,4 +140,3 @@ $> rspec
 ##License
 
 <p>Released under the <a href="http://www.opensource.org/licenses/MIT">MIT license</a>.</p>
-
