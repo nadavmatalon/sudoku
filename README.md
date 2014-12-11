@@ -53,7 +53,7 @@ __Update (14.11.14)__ : I've re-written the app from scratch
 to generate a more cohesive and cleaner code.
 
 __Update (11.12.14)__ : Another round of deep code &amp; test refactoring, 
-this time splitting the signle original Grid class into a Game and Puzzle classes, 
+this time splitting the single original Grid class into a Game and Puzzle classes, 
 as well as adding two new modules: PuzzleGenerator and PuzzleSolver which complement 
 the Puzzle class. 
 
