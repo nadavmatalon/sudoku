@@ -35,8 +35,10 @@ module PuzzleSolver
   end
 
   def second_attempt
+    start_time = Time.now
     unsolved_index = first_unsolved_square
     candidates_for(unsolved_index).each do |candidate|
+      break if over_time_limit?(start_time, 3.00)
       puzzle[unsolved_index] = candidate
       puzzle_clone = self.class.new(self.to_str)
       upload(puzzle_clone.to_str) and return if puzzle_clone.solve
@@ -53,5 +55,9 @@ module PuzzleSolver
 
   def first_unsolved_square
     puzzle.index(0)
+  end
+
+  def over_time_limit?(start_time, delta_secs)
+    Time.now - start_time > delta_secs
   end
 end
