@@ -29,3 +29,5 @@ class Game
     puts(puzzle.str_for_print)
   end
 end
+
+
