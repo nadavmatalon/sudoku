@@ -96,8 +96,8 @@ Using these classes &amp modules, the app can:
 
 * Create a new game with a random Sudoku puzzle 
 * Puzzles can be generated at a specified difficulty level (from very easy to very hard)
-* Solve any given puzzle (though please note that some solutions take time...)
 * Check if a puzzle is solved
+* Solve any given puzzle (though please note that some solutions take time...)
 * Upload a new puzzle to the game
 * Print the grid's current state in the terminal
 
@@ -111,18 +111,37 @@ $> irb
 ## The above method generate a new game with a very easy puzzle (difficulty level: 1)
 >> game.puzzle_str
 => "092140607700285109035609800210008500369512748578406300053020961020001400080904270"
+>> game.puzzle_solved?
+=> false
 >> game.solve_puzzle
 => true
 >> game.puzzle_str
 => "892143657746285139135679824214738596369512748578496312453827961927361485681954273"
->> game = Game.new(5)
-## The above method generate a new game with a very hard puzzle (difficulty level: 5)
+>> game.puzzle_solved?
+=> true
+>> game = game.new_puzzle(5)
+## The above method uploads a very hard puzzle to the game (difficulty level: 5)
 >> game.puzzle_str
-=> "000100000004007000000908000010000000200830000800000000000000000000000000000000000"
+=> "000000008000000000700000000000000000009000020000000100502800000000000000000006400"
 >> game.solve_puzzle
 => true
 >> game.puzzle_str
-=> "325146789984327156167958234413265897276839415859471362531792648642583971798614523"
+=> "123457698456189237798263514214375869389614725675928143542831976967542381831796452"
+=> game.print_puzzle
+
+ 1 2 3 | 4 5 7 | 6 9 8 
+ 4 5 6 | 1 8 9 | 2 3 7 
+ 7 9 8 | 2 6 3 | 5 1 4 
+ ---------------------
+ 2 1 4 | 3 7 5 | 8 6 9 
+ 3 8 9 | 6 1 4 | 7 2 5 
+ 6 7 5 | 9 2 8 | 1 4 3 
+ ---------------------
+ 5 4 2 | 8 3 1 | 9 7 6 
+ 9 6 7 | 5 4 2 | 3 8 1 
+ 8 3 1 | 7 9 6 | 4 5 2 
+
+=> nil
 ```
 
 

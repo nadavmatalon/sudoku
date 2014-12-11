@@ -20,4 +20,12 @@ class Game
   def solve_puzzle
     puzzle.solve
   end
+
+  def puzzle_solved?
+    puzzle.solved?
+  end
+
+  def print_puzzle
+    puts(puzzle.str_for_print)
+  end
 end
