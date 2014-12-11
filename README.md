@@ -119,7 +119,7 @@ $> irb
 => "892143657746285139135679824214738596369512748578496312453827961927361485681954273"
 >> game.puzzle_solved?
 => true
->> game = game.new_puzzle(5)
+>> game.new_puzzle(5)
 ## The above method uploads a very hard puzzle to the game (difficulty level: 5)
 >> game.puzzle_str
 => "000000008000000000700000000000000000009000020000000100502800000000000000000006400"
