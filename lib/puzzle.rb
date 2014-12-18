@@ -22,15 +22,15 @@ class Puzzle
     rows.transpose
   end
 
+  def peers_of(index)
+    peers = [rows[index/9], columns[index%9], boxes[box_of(index)]]
+    peers.flatten.uniq.reject { |value| value == (0 || value_of(index)) }
+  end
+
   def boxes(values = rows)
     (0..2).inject([]) do |boxes, index|
       boxes + values.slice(3 * index, 3).transpose.each_slice(3).map(&:flatten)
     end
-  end
-
-  def peers_of(index)
-    peers = rows[index/9] + columns[index%9] + boxes[box_of(index)]
-    peers.flatten.sort.uniq.reject { |value| value == (0 or value_of(index)) }
   end
 
   def box_of(index)

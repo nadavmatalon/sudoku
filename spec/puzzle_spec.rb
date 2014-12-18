@@ -17,6 +17,11 @@ describe Puzzle do
   let (:unsolved_puzzle) { Puzzle.new(UNSOLVED_PUZZLE) }
   let (:solved_puzzle)   { Puzzle.new(SOLVED_PUZZLE) }
 
+  # before each do
+  #   solved
+  # end
+
+
   context 'During Initialization' do
 
     it 'can be initialized as an empty puzzle' do

@@ -5,7 +5,7 @@ module PuzzleSolver
   def solve
     first_attempt
     second_attempt unless solved?
-    solved?
+    solved? ? (set_solution and return true) : false
   end
 
   def first_attempt
@@ -21,8 +21,9 @@ module PuzzleSolver
     unsolved_index = first_unsolved_square
     candidates_for(unsolved_index).each do |candidate|
       puzzle_arr[unsolved_index] = candidate
-      puzzle_clone = self.dup
-      upload(puzzle_clone.current_state) and return if puzzle_clone.solve
+      puzzle_clone = self.class.new
+      puzzle_clone.upload(current_state)
+      self.upload(puzzle_clone.current_state) and return if puzzle_clone.solve
     end
   end
 

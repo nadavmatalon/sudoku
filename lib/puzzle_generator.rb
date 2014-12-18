@@ -8,7 +8,7 @@ module PuzzleGenerator
     fail(ArgumentError, level_err_msg) unless (1..5).include?(level)
     reset_puzzle
     create_seed
-    solve ? set_solution && punch_to(level) : generate_puzzle(level)
+    solve ? punch_to(level) : generate_puzzle(level)
   end
 
   def reset_puzzle
@@ -24,6 +24,10 @@ module PuzzleGenerator
 
   def seed_indices
     boxes(indexed).select.with_index { |box, index| box if [0, 4, 8].include?(index) }
+  end
+
+  def set_solution
+    @solution_arr = puzzle_arr.join.chars.map(&:to_i)
   end
 
   def punch_to(level)
