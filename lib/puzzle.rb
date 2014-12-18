@@ -7,8 +7,7 @@ class Puzzle
   attr_reader :puzzle_arr
 
   def initialize(puzzle_str = '0' * 81)
-    fail(ArgumentError, str_err_msg) unless valid?(puzzle_str)
-    upload(puzzle_str)
+    valid?(puzzle_str) ? upload(puzzle_str) : fail(ArgumentError, str_err_msg)
   end
 
   def upload(puzzle_str)
@@ -53,7 +52,7 @@ class Puzzle
   end
 
   def valid?(puzzle_str)
-    (/^\d{81}$/) === puzzle_str
+    (/^\d{81}$/) === puzzle_str ? true : false
   end
 
   def str_err_msg

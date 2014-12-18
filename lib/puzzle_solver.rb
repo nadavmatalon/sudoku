@@ -56,7 +56,7 @@ module PuzzleSolver
   def solved?
     (rows + columns + boxes).map { |values| values.sort == (1..9).to_a }.all?
   end
- 
+
   def set_solution
     @solution_arr = puzzle_arr.join.chars.map(&:to_i)
   end

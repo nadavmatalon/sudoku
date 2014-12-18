@@ -2,6 +2,9 @@ class Puzzle_Generator < Puzzle; include PuzzleSolver, PuzzleGenerator; end
 
 describe 'PuzzleGenerator' do
 
+  let (:empty_puzzle)    { Puzzle_Generator.new }
+  let (:unsolved_puzzle) { Puzzle_Generator.new(UNSOLVED_PUZZLE) }
+  let (:solved_puzzle)   { Puzzle_Generator.new(SOLVED_PUZZLE) }
   let (:seed_boxes_indices) {
     [
       [0, 9, 18, 1, 10, 19, 2, 11, 20], 
@@ -9,16 +12,13 @@ describe 'PuzzleGenerator' do
       [60, 69, 78, 61, 70, 79, 62, 71, 80]
     ]
   }
-  let (:empty_puzzle)    { Puzzle_Generator.new }
-  let (:unsolved_puzzle) { Puzzle_Generator.new(UNSOLVED_PUZZLE) }
-  let (:solved_puzzle)   { Puzzle_Generator.new(SOLVED_PUZZLE) }
 
   context 'Puzzle' do
 
-    context 'Reset' do
+    context 'Delete' do
 
-      it 'can reset a puzzle' do
-        unsolved_puzzle.reset_puzzle
+      it 'can delete an existing puzzle string' do
+        unsolved_puzzle.delete_puzzle
         expect(unsolved_puzzle.current_state).to eq '0' * 81
       end
     end

@@ -16,7 +16,7 @@ describe Puzzle do
       [60, 69, 78, 61, 70, 79, 62, 71, 80]
     ]
   }
-  let (:invalid_args) {
+  let (:invalid_puzzle_strings) {
     [
       '0' * 80,
       '0' * 82,
@@ -39,8 +39,9 @@ describe Puzzle do
     end
 
     it 'can ony be initialized with a puzzle string made of 81 digits' do
-      invalid_args.each do |arg|
-        expect{ Puzzle.new(arg) }.to raise_error(ArgumentError)
+      str_err_msg = 'Argument must be String of 81 digits'
+      invalid_puzzle_strings.each do |puzzle_str|
+        expect{ Puzzle.new(puzzle_str) }.to raise_error(ArgumentError, str_err_msg)
       end
     end
 
@@ -102,6 +103,7 @@ describe Puzzle do
 
     it 'can find the peer values of a square' do
       expect(unsolved_puzzle.peers_of(0).sort).to eq (1..9).to_a
+      expect(unsolved_puzzle.peers_of(80).sort).to eq (1..7).to_a
     end
 
     it 'returns an empty array if all peers have the value 0' do
@@ -116,9 +118,24 @@ describe Puzzle do
     end
   end
 
-  context 'STDN Output' do
+  context 'Puzzle String' do
 
-    it "can output it's curent state as a printable string" do
+    it 'knows if a puzzle string is valid' do
+      [empty_puzzle, unsolved_puzzle, solved_puzzle].each do |puzzle|
+        expect(puzzle.valid?(puzzle.current_state)).to eq true
+      end
+    end
+
+    it 'knows if a puzzle string is valid' do
+      invalid_puzzle_strings.each do |puzzle_str|
+        expect(empty_puzzle.valid?(puzzle_str)).to eq false
+      end
+    end
+  end
+
+  context 'Puzzle Output' do
+
+    it "can output the curent state of it's puzzle as a printable string" do
       puts unsolved_puzzle.str_for_print
     end
   end

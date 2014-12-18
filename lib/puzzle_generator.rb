@@ -6,12 +6,12 @@ module PuzzleGenerator
 
   def generate_puzzle(level = 3)
     fail(ArgumentError, level_err_msg) unless (1..5).include?(level)
-    reset_puzzle
+    delete_puzzle
     create_seed
     solve ? punch_to(level) : generate_puzzle(level)
   end
 
-  def reset_puzzle
+  def delete_puzzle
     @puzzle_arr = Array.new(81, 0)
   end
 
@@ -24,10 +24,6 @@ module PuzzleGenerator
 
   def seed_indices
     boxes(indexed).select.with_index { |box, index| box if [0, 4, 8].include?(index) }
-  end
-
-  def set_solution
-    @solution_arr = puzzle_arr.join.chars.map(&:to_i)
   end
 
   def punch_to(level)
