@@ -1,5 +1,7 @@
 module PuzzleSolver
 
+  attr_reader :solution_arr
+
   def solve
     first_attempt
     second_attempt unless solved?
@@ -18,27 +20,27 @@ module PuzzleSolver
   def second_attempt
     unsolved_index = first_unsolved_square
     candidates_for(unsolved_index).each do |candidate|
-      puzzle[unsolved_index] = candidate
+      puzzle_arr[unsolved_index] = candidate
       puzzle_clone = self.dup
-      upload(puzzle_clone.to_str) and return if puzzle_clone.solve
+      upload(puzzle_clone.current_state) and return if puzzle_clone.solve
     end
   end
 
   def solve_all_squares
-    puzzle.each_index { |index| solve_at(index) }
+    puzzle_arr.each_index { |index| solve_at(index) }
   end
 
   def solve_at(index)
     solutions = candidates_for(index) || []
-    puzzle[index] = solutions.first if solutions.count == 1
+    puzzle_arr[index] = solutions.first if solutions.count == 1
   end
 
   def solved_squares_count
-    puzzle.count { |square| square != 0 }
+    puzzle_arr.count { |square| square != 0 }
   end
 
   def first_unsolved_square
-    puzzle.index(0)
+    puzzle_arr.index(0)
   end
 
   def candidates_for(index)
@@ -47,10 +49,18 @@ module PuzzleSolver
   end
 
   def solved_at?(index)
-    puzzle[index] != 0
+    puzzle_arr[index] != 0
   end
 
   def solved?
     (rows + columns + boxes).map { |values| values.sort == (1..9).to_a }.all?
+  end
+ 
+  def set_solution
+    @solution_arr = puzzle_arr.join.chars.map(&:to_i)
+  end
+
+  def solution_str
+    solution_arr ? solution_arr.join : ''
   end
 end
