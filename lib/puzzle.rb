@@ -7,7 +7,7 @@ class Puzzle
   attr_reader :puzzle_arr
 
   def initialize(puzzle_str = '0' * 81)
-    fail(ArgumentError, str_err_msg) unless puzzle_str.match(/^\d{81}$/)
+    fail(ArgumentError, str_err_msg) unless valid?(puzzle_str)
     upload(puzzle_str)
   end
 
@@ -50,6 +50,10 @@ class Puzzle
     separator = '-' * 21 + "\n"
     squares = rows.each { |row| row.insert(3, '|').insert(7, '|').insert(11, "\n").join(' ') }
     squares.insert(3, separator).insert(7, separator).join(' ').prepend("\n ").concat("\n")
+  end
+
+  def valid?(puzzle_str)
+    (/^\d{81}$/) === puzzle_str
   end
 
   def str_err_msg

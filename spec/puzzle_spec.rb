@@ -3,7 +3,7 @@ describe Puzzle do
   let (:empty_puzzle)    { Puzzle.new }
   let (:unsolved_puzzle) { Puzzle.new(UNSOLVED_PUZZLE) }
   let (:solved_puzzle)   { Puzzle.new(SOLVED_PUZZLE)}
-  let (:boxes_indices) {
+  let (:boxes_indices)   {
     [
       [0, 9, 18, 1, 10, 19, 2, 11, 20],
       [3, 12, 21, 4, 13, 22, 5, 14, 23],
@@ -16,6 +16,17 @@ describe Puzzle do
       [60, 69, 78, 61, 70, 79, 62, 71, 80]
     ]
   }
+  let (:invalid_args) {
+    [
+      '0' * 80,
+      '0' * 82,
+      'a' * 81,
+      'a' * 40 + '0' * 41,
+      :a,
+      ['0'],
+      {'a' => '0'}
+    ]
+  }
 
   context 'During Initialization' do
 
@@ -25,6 +36,12 @@ describe Puzzle do
 
     it 'can be initialized with a puzzle string' do
       expect{ unsolved_puzzle }.not_to raise_error
+    end
+
+    it 'can ony be initialized with a puzzle string made of 81 digits' do
+      invalid_args.each do |arg|
+        expect{ Puzzle.new(arg) }.to raise_error(ArgumentError)
+      end
     end
 
     context 'Current State' do
