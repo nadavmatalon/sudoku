@@ -1,9 +1,13 @@
 module PuzzleGenerator
 
-  def upload_new_puzzle(level = 3)
-    reset_puzzle if valid?(level)
+  def generate_puzzle(level)
+    reset_puzzle
     create_seed
-    solve ? punch(level * 10 + 21) : upload_new_puzzle(level)
+    solve ? set_solution && punch_to(level) : generate_puzzle(level)
+  end
+
+  def reset_puzzle
+    @puzzle = Array.new(81, 0)
   end
 
   def create_seed
@@ -13,25 +17,19 @@ module PuzzleGenerator
     end
   end
 
-  def reset_puzzle
-    @puzzle = Array.new(81, 0)
-  end
-
   def seed_indices
     boxes(indexed).select.with_index { |box, index| box if [0, 4, 8].include?(index) }
   end
 
-  def punch(num_of_punches)
+  def set_solution
+    @solution = puzzle.join.chars.map(&:to_i)
+  end
+
+  def punch_to(level)
+    num_of_punches = level * 10 + 21
     while num_of_punches > 0
       random_square = rand(0..80)
       (puzzle[random_square] = 0 and num_of_punches -= 1) if solved_at?(random_square)
     end
-  end
-
-  private
-
-  def valid?(level)
-    type_err_msg = 'Argument must be Fixnum between 1-5'
-    fail(TypeError, type_err_msg) unless (1..5).include?(level)
   end
 end

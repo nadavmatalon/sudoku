@@ -5,10 +5,11 @@ class Puzzle
 
   include PuzzleGenerator, PuzzleSolver
 
-  attr_reader :puzzle
+  attr_reader :puzzle, :solution
 
-  def initialize(puzzle_str = '0' * 81)
-    upload(puzzle_str)
+  def initialize
+    @puzzle = Array.new(81, 0)
+    @solution = Array.new(81, 0)
   end
 
   def upload(puzzle_str)
@@ -30,7 +31,7 @@ class Puzzle
   end
 
   def peers_of(index)
-    peers = rows[index / 9] + columns[index % 9] + boxes[box_of(index)]
+    peers = rows[index/9] + columns[index%9] + boxes[box_of(index)]
     peers.flatten.sort.uniq.reject { |value| value == (0 or value_of(index)) }
   end
 
@@ -50,5 +51,12 @@ class Puzzle
     separator = '-' * 21 + "\n"
     squares = rows.each { |row| row.insert(3, '|').insert(7, '|').insert(11, "\n").join(' ') }
     squares.insert(3, separator).insert(7, separator).join(' ').prepend("\n ").concat("\n")
+  end
+
+ private
+
+  def valid?(level)
+    type_err_msg = 'Argument must be Fixnum between 1-5'
+    fail(TypeError, type_err_msg) unless (1..5).include?(level)
   end
 end
