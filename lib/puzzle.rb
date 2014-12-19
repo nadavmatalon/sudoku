@@ -6,7 +6,7 @@ class Puzzle
 
   attr_reader :puzzle_arr
 
-  def initialize(puzzle_str = '0' * 81)
+  def initialize(puzzle_str = '0' * 81)  
     valid?(puzzle_str) ? upload(puzzle_str) : fail(ArgumentError, str_err_msg)
   end
 
