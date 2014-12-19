@@ -2,14 +2,18 @@ describe Game do
 
   let (:game) { Game.new }
 
-  context 'During Initialization' do
+  context 'Initialization' do
 
     it 'can be done with the default difficulty level' do
       expect{ game }.not_to raise_error
     end
 
-    it 'can be doen with a specified difficulty level' do
+    it 'can be doen with a very easy pusszle' do
       expect{ Game.new(1) }.not_to raise_error
+    end
+
+    it 'can be doen with a very hard pusszle' do
+      expect{ Game.new(5) }.not_to raise_error
     end
 
     it 'can only be done with a single difficulty level' do
@@ -30,12 +34,6 @@ describe Game do
 
     it 'is done with a medium level puzzle by defualt' do
       expect(game.puzzle.solved_squares_count).to eq 30
-    end
-
-    it 'can be done with a puzzle of any difficulty level' do
-      for puzzle_level in 1..5
-        expect{ Game.new(puzzle_level) }.not_to raise_error
-      end
     end
   end
 

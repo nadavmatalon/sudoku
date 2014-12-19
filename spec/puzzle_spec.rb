@@ -28,17 +28,17 @@ describe Puzzle do
     ]
   }
 
-  context 'During Initialization' do
+  context 'Initialization' do
 
-    it 'can be initialized as an empty puzzle' do
+    it 'can be done with an empty puzzle string' do
       expect{ empty_puzzle }.not_to raise_error
     end
 
-    it 'can be initialized with a puzzle string' do
+    it 'can be done with a puzzle string' do
       expect{ unsolved_puzzle }.not_to raise_error
     end
 
-    it 'can ony be initialized with a puzzle string made of 81 digits' do
+    it 'can ony be done with a puzzle string made of 81 digits' do
       str_err_msg = 'Argument must be String of 81 digits'
       invalid_puzzle_strings.each do |puzzle_str|
         expect{ Puzzle.new(puzzle_str) }.to raise_error(ArgumentError, str_err_msg)
@@ -120,13 +120,13 @@ describe Puzzle do
 
   context 'Puzzle String' do
 
-    it 'knows if a puzzle string is valid' do
+    it 'knows if puzzle string is valid' do
       [empty_puzzle, unsolved_puzzle, solved_puzzle].each do |puzzle|
         expect(puzzle.valid?(puzzle.current_state)).to eq true
       end
     end
 
-    it 'knows if a puzzle string is valid' do
+    it 'knows if puzzle string is invalid' do
       invalid_puzzle_strings.each do |puzzle_str|
         expect(empty_puzzle.valid?(puzzle_str)).to eq false
       end
