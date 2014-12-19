@@ -10,11 +10,11 @@ class Game
 
   def new_puzzle(level = 3)
     @puzzle = Puzzle.new
-    puzzle.upload_new_puzzle(level)
+    puzzle.generate_puzzle(level)
   end
 
-  def puzzle_str
-    puzzle.to_str
+  def current_state
+    puzzle.current_state
   end
 
   def solve_puzzle

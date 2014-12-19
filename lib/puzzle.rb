@@ -1,26 +1,30 @@
 require_relative 'puzzle_generator'
-require_relative 'puzzle_solver'
 
 class Puzzle
 
-  include PuzzleGenerator, PuzzleSolver
+  include PuzzleGenerator
 
-  attr_reader :puzzle
+  attr_reader :puzzle_arr
 
-  def initialize(puzzle_str = '0' * 81)
-    upload(puzzle_str)
+  def initialize(puzzle_str = '0' * 81)  
+    valid?(puzzle_str) ? upload(puzzle_str) : fail(ArgumentError, str_err_msg)
   end
 
   def upload(puzzle_str)
-    @puzzle = puzzle_str.chars.map(&:to_i)
+    @puzzle_arr = puzzle_str.chars.map(&:to_i)
   end
 
   def rows
-    puzzle.each_slice(9).to_a
+    puzzle_arr.each_slice(9).to_a
   end
 
   def columns
     rows.transpose
+  end
+
+  def peers_of(index)
+    peers = [rows[index/9], columns[index%9], boxes[box_of(index)]]
+    peers.flatten.uniq.reject { |value| value == (0 || value_of(index)) }
   end
 
   def boxes(values = rows)
@@ -29,26 +33,29 @@ class Puzzle
     end
   end
 
-  def peers_of(index)
-    peers = rows[index / 9] + columns[index % 9] + boxes[box_of(index)]
-    peers.flatten.sort.uniq.reject { |value| value == (0 or value_of(index)) }
-  end
-
   def box_of(index)
     boxes(indexed).map { |boxes| boxes & [index] }.index([index])
   end
 
   def indexed
-    puzzle.map.with_index { |_, index| index }.each_slice(9).to_a
+    puzzle_arr.map.with_index { |_, index| index }.each_slice(9).to_a
   end
 
-  def to_str
-    puzzle.join
+  def current_state
+    puzzle_arr.join
   end
 
   def str_for_print
     separator = '-' * 21 + "\n"
     squares = rows.each { |row| row.insert(3, '|').insert(7, '|').insert(11, "\n").join(' ') }
     squares.insert(3, separator).insert(7, separator).join(' ').prepend("\n ").concat("\n")
+  end
+
+  def valid?(puzzle_str)
+    (/^\d{81}$/) === puzzle_str ? true : false
+  end
+
+  def str_err_msg
+    'Argument must be String of 81 digits'
   end
 end

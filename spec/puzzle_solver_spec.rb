@@ -2,9 +2,9 @@ class Puzzle_Solver < Puzzle; include PuzzleSolver; end
 
 describe 'PuzzleSolver' do
 
-  let (:empty_puzzle) { Puzzle_Solver.new }
+  let (:empty_puzzle)    { Puzzle_Solver.new }
   let (:unsolved_puzzle) { Puzzle_Solver.new(UNSOLVED_PUZZLE) }
-  let (:solved_puzzle) { Puzzle_Solver.new(SOLVED_PUZZLE) }
+  let (:solved_puzzle)   { Puzzle_Solver.new(SOLVED_PUZZLE) }
   let (:erroneously_solved_puzzle) { Puzzle_Solver.new(ERR_PUZZLE) }
 
   context 'Square' do
@@ -20,7 +20,7 @@ describe 'PuzzleSolver' do
       end
     end
 
-    context 'Find Unsolved Square' do
+    context 'First Unsolved Square' do
 
       it 'can find the index of the first unsolved square' do
         expect(empty_puzzle.first_unsolved_square).to eq 0
@@ -43,7 +43,7 @@ describe 'PuzzleSolver' do
       end
     end
 
-    context 'Counting' do
+    context 'Count Solved Squares' do
       it 'can count the number of solved squares' do
         expect(empty_puzzle.solved_squares_count).to eq 0
         expect(unsolved_puzzle.solved_squares_count).to eq 50
@@ -105,35 +105,5 @@ describe 'PuzzleSolver' do
         expect(Puzzle_Solver.new(IMPOSSIBLE_PUZZLE).solve).to be false
       end
     end
-  end
-
-  it 'can generate a new very easy puzzle and solve it' do
-    empty_puzzle.upload_new_puzzle(1)
-    empty_puzzle.solve
-    expect(empty_puzzle.solved?).to be true
-  end
-
-  it 'can generate a new easy puzzle and solve it' do
-    empty_puzzle.upload_new_puzzle(2)
-    empty_puzzle.solve
-    expect(empty_puzzle.solved?).to be true
-  end
-
-  it 'can generate a new medium puzzle and solve it' do
-    empty_puzzle.upload_new_puzzle(3)
-    empty_puzzle.solve
-    expect(empty_puzzle.solved?).to be true
-  end
-
-  it 'can generate a new hard puzzle and solve it' do
-    empty_puzzle.upload_new_puzzle(4)
-    empty_puzzle.solve
-    expect(empty_puzzle.solved?).to be true
-  end
-
-  it 'can generate a new very hard puzzle and solve it' do
-    empty_puzzle.upload_new_puzzle(5)
-    empty_puzzle.solve
-    expect(empty_puzzle.solved?).to be true
   end
 end

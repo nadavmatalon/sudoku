@@ -1,6 +1,9 @@
 describe Puzzle do
 
-  let (:boxes_indices) {
+  let (:empty_puzzle)    { Puzzle.new }
+  let (:unsolved_puzzle) { Puzzle.new(UNSOLVED_PUZZLE) }
+  let (:solved_puzzle)   { Puzzle.new(SOLVED_PUZZLE)}
+  let (:boxes_indices)   {
     [
       [0, 9, 18, 1, 10, 19, 2, 11, 20],
       [3, 12, 21, 4, 13, 22, 5, 14, 23],
@@ -13,28 +16,43 @@ describe Puzzle do
       [60, 69, 78, 61, 70, 79, 62, 71, 80]
     ]
   }
-  let (:empty_puzzle)    { Puzzle.new }
-  let (:unsolved_puzzle) { Puzzle.new(UNSOLVED_PUZZLE) }
-  let (:solved_puzzle)   { Puzzle.new(SOLVED_PUZZLE) }
+  let (:invalid_puzzle_strings) {
+    [
+      '0' * 80,
+      '0' * 82,
+      'a' * 81,
+      'a' * 40 + '0' * 41,
+      :a,
+      ['0'],
+      {'a' => '0'}
+    ]
+  }
 
-  context 'During Initialization' do
+  context 'Initialization' do
 
-    it 'can be initialized as an empty puzzle' do
+    it 'can be done with an empty puzzle string' do
       expect{ empty_puzzle }.not_to raise_error
     end
 
-    it 'can be initialized with a puzzle' do
+    it 'can be done with a puzzle string' do
       expect{ unsolved_puzzle }.not_to raise_error
+    end
+
+    it 'can ony be done with a puzzle string made of 81 digits' do
+      str_err_msg = 'Argument must be String of 81 digits'
+      invalid_puzzle_strings.each do |puzzle_str|
+        expect{ Puzzle.new(puzzle_str) }.to raise_error(ArgumentError, str_err_msg)
+      end
     end
 
     context 'Current State' do
 
-      it 'is empty (set to zeros) by default' do
-        expect(empty_puzzle.puzzle).to eq Array.new(81, 0)
+      it 'is set to zeros if no puzzle string is given (default)' do
+        expect(empty_puzzle.current_state).to eq ('0' * 81)
       end
 
-      it 'can be set with a String argument' do
-        expect(unsolved_puzzle.puzzle.join).to eq UNSOLVED_PUZZLE
+      it 'is set to the puzzle string if given' do
+        expect(unsolved_puzzle.current_state).to eq UNSOLVED_PUZZLE
       end
     end
   end
@@ -43,7 +61,7 @@ describe Puzzle do
 
     it 'can have a new puzzle string uploaded' do
       empty_puzzle.upload(UNSOLVED_PUZZLE)
-      expect(empty_puzzle.to_str).to eq UNSOLVED_PUZZLE
+      expect(empty_puzzle.current_state).to eq UNSOLVED_PUZZLE
     end
 
     it "can return the indices of all it's squares" do
@@ -84,7 +102,8 @@ describe Puzzle do
   context 'Squares' do
 
     it 'can find the peer values of a square' do
-      expect(unsolved_puzzle.peers_of(0)).to eq (1..9).to_a
+      expect(unsolved_puzzle.peers_of(0).sort).to eq (1..9).to_a
+      expect(unsolved_puzzle.peers_of(80).sort).to eq (1..7).to_a
     end
 
     it 'returns an empty array if all peers have the value 0' do
@@ -99,13 +118,24 @@ describe Puzzle do
     end
   end
 
-  context 'Current State' do
+  context 'Puzzle String' do
 
-    it "can output it's current state as a simple string" do
-      expect(unsolved_puzzle.to_str).to eq UNSOLVED_PUZZLE
+    it 'knows if puzzle string is valid' do
+      [empty_puzzle, unsolved_puzzle, solved_puzzle].each do |puzzle|
+        expect(puzzle.valid?(puzzle.current_state)).to eq true
+      end
     end
 
-    it "can output it's curent state as a printable string" do
+    it 'knows if puzzle string is invalid' do
+      invalid_puzzle_strings.each do |puzzle_str|
+        expect(empty_puzzle.valid?(puzzle_str)).to eq false
+      end
+    end
+  end
+
+  context 'Puzzle Output' do
+
+    it "can output the curent state of it's puzzle as a printable string" do
       puts unsolved_puzzle.str_for_print
     end
   end
